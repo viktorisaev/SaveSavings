@@ -6,30 +6,27 @@ using System.Threading.Tasks;
 
 namespace SaveSavings
 {
-    public class Contacts
+    public class Spends
     {
         //The Id property is marked as the Primary Key  
         [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public DateTime Date { get; set; }
 
-        public string PhoneNumber { get; set; }
-
-        public string CreationDate { get; set; }
+        public int Amount { get; set; }
 
 
-        public Contacts()
+        public Spends()
         {
             //empty constructor  
         }
 
 
-        public Contacts(string name, string phone_no)
+        public Spends(DateTime _Date, int _Amount)
         {
-            Name = name;
-            PhoneNumber = phone_no;
-            CreationDate = DateTime.Now.ToString();
+            this.Date = _Date;
+            this.Amount = _Amount;
         }
 
     }

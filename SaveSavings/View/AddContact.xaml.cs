@@ -17,12 +17,14 @@ namespace SaveSavings
             this.InitializeComponent();
         }
 
-        private async void AddContact_Click(object sender, RoutedEventArgs e)
+
+        private async void AddExpense_Click(object sender, RoutedEventArgs e)
         {
             DatabaseHelperClass Db_Helper = new DatabaseHelperClass();//Creating object for DatabaseHelperClass.cs from ViewModel/DatabaseHelperClass.cs    
             if (NametxtBx.Text != "" & PhonetxtBx.Text != "")
             {
-                Db_Helper.Insert(new Contacts(NametxtBx.Text, PhonetxtBx.Text));
+                // TODO: insert date
+                Db_Helper.Insert(new Spends(DateTime.Now,/*NametxtBx.Text*/ Int32.Parse(PhonetxtBx.Text)));
                 Frame.Navigate(typeof(HomePage));//after add contact redirect to contact listbox page    
             }
             else
@@ -31,5 +33,8 @@ namespace SaveSavings
                 await messageDialog.ShowAsync();
             }
         }
+
+
+
     }
 }

@@ -15,7 +15,7 @@ namespace SaveSavings
             {
                 using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), DB_PATH))
                 {
-                    conn.CreateTable<Contacts>();
+                    conn.CreateTable<Spends>();
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace SaveSavings
         }
 
         // Insert the new contact in the Contacts table.   
-        public void Insert(Contacts objContact)
+        public void Insert(Spends objContact)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
@@ -45,23 +45,29 @@ namespace SaveSavings
         }
 
         // Retrieve the specific contact from the database.     
-        public Contacts ReadContact(int contactid)
-        {
-            using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
-            {
-                var existingconact = conn.Query<Contacts>("select * from Contacts where Id =" + contactid).FirstOrDefault();
-                return existingconact;
-            }
-        }
+        //public Spends ReadContact(int contactid)
+        //{
+        //    using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+        //    {
+        //        var existingconact = conn.Query<Spends>("select * from Contacts where Id =" + contactid).FirstOrDefault();
+        //        return existingconact;
+        //    }
+        //}
 
-        public ObservableCollection<Contacts> ReadAllContacts()
+        public ObservableCollection<Spends> ReadAllContacts()
         {
             try
             {
                 using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
                 {
-                    List<Contacts> myCollection = conn.Table<Contacts>().ToList<Contacts>();
-                    ObservableCollection<Contacts> ContactsList = new ObservableCollection<Contacts>(myCollection);
+                    List<Spends> myCollection = conn.Table<Spends>().ToList<Spends>();
+
+                    foreach(Spends s in myCollection)
+                    {
+                        s.Date = s.Date.ToLocalTime();
+                    }
+
+                    ObservableCollection<Spends> ContactsList = new ObservableCollection<Spends>(myCollection);
                     return ContactsList;
                 }
             }
@@ -73,12 +79,12 @@ namespace SaveSavings
         }
 
         //Update existing conatct   
-        public void UpdateDetails(Contacts ObjContact)
+        public void UpdateDetails(Spends ObjContact)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
 
-                var existingconact = conn.Query<Contacts>("select * from Contacts where Id =" + ObjContact.Id).FirstOrDefault();
+                var existingconact = conn.Query<Spends>("select * from Spends where Id =" + ObjContact.Id).FirstOrDefault();
                 if (existingconact != null)
                 {
 
@@ -97,8 +103,8 @@ namespace SaveSavings
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
 
-                conn.DropTable<Contacts>();
-                conn.CreateTable<Contacts>();
+                conn.DropTable<Spends>();
+                conn.CreateTable<Spends>();
                 conn.Dispose();
                 conn.Close();
 
@@ -111,7 +117,7 @@ namespace SaveSavings
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
 
-                var existingconact = conn.Query<Contacts>("select * from Contacts where Id =" + Id).FirstOrDefault();
+                var existingconact = conn.Query<Spends>("select * from Spends where Id =" + Id).FirstOrDefault();
                 if (existingconact != null)
                 {
                     conn.RunInTransaction(() =>

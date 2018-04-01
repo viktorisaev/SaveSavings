@@ -5,7 +5,7 @@ namespace SaveSavings
     public class ReadAllContactsList
     {
         DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
-        public ObservableCollection<Contacts> GetAllContacts()
+        public ObservableCollection<Spends> GetAllContacts()
         {
             return Db_Helper.ReadAllContacts();
         }

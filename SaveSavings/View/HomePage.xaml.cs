@@ -23,7 +23,7 @@ namespace SaveSavings
     /// </summary>
     public sealed partial class HomePage : Page
     {
-        ObservableCollection<Contacts> DB_ContactList = new ObservableCollection<Contacts>();
+        ObservableCollection<Spends> DB_ContactList = new ObservableCollection<Spends>();
         public HomePage()
         {
             this.InitializeComponent();
@@ -44,7 +44,7 @@ namespace SaveSavings
         {
             if (listBoxobj.SelectedIndex != -1)
             {
-                Contacts listitem = listBoxobj.SelectedItem as Contacts;//Get slected listbox item contact ID
+                Spends listitem = listBoxobj.SelectedItem as Spends;//Get slected listbox item contact ID
                 Frame.Navigate(typeof(DetailsPage), listitem);
             }
         }

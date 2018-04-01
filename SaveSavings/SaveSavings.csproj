@@ -98,7 +98,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Contacts.cs" />
+    <Compile Include="Model\Spends.cs" />
     <Compile Include="ViewModel\DatabaseHelperClass.cs" />
     <Compile Include="View\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>

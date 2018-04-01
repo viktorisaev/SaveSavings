@@ -22,7 +22,7 @@ namespace SaveSavings
         /// </summary>
 
 
-        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "ContactsManager.sqlite"));//DataBase Name 
+        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "ContactsManager2.sqlite"));//DataBase Name 
 
 
 

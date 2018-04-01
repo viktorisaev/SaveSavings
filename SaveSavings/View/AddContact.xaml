@@ -21,9 +21,9 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <TextBox Name="NametxtBx" Margin="10" Header="Name"/>
-                <TextBox InputScope="Digits" Name="PhonetxtBx" Margin="10" MaxLength="10" Header="PhoneNumber" />
-                <Button Content="Add Contact" Margin="10" HorizontalAlignment="Stretch" Click="AddContact_Click"/>
+                <TextBox x:Name="NametxtBx" Header="Date" Margin="10" />
+                <TextBox x:Name="PhonetxtBx" Header="Amount" InputScope="CurrencyAmount" Margin="10" />
+                <Button Content="Add Expense" Margin="10" HorizontalAlignment="Stretch" Click="AddExpense_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
