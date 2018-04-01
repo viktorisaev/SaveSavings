@@ -64,10 +64,17 @@ namespace SaveSavings
 
                     foreach(Spends s in myCollection)
                     {
-                        s.Date = s.Date.ToLocalTime();
+                        s.Date = s.Date.ToLocalTime().Date;
                     }
 
-                    ObservableCollection<Spends> ContactsList = new ObservableCollection<Spends>(myCollection);
+
+                    var tt = (from r in myCollection
+                              group r by r.Date into g
+                              select new Spends { Date = g.Key, Amount = g.Sum( (t)=>(t.Amount) ) }
+//                              select r
+                              );
+
+                    ObservableCollection<Spends> ContactsList = new ObservableCollection<Spends>(tt);
                     return ContactsList;
                 }
             }
