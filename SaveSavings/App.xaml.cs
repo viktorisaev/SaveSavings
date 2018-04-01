@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SQLite.Net;
+using System;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace SaveSavings
@@ -26,11 +20,22 @@ namespace SaveSavings
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+
+
+        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "ContactsManager.sqlite"));//DataBase Name 
+
+
+
         public App()
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            // database
+            DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
+            Db_Helper.CreateDatabase(DB_PATH);
         }
+
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
