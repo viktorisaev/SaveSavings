@@ -16,7 +16,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Read All contacts with listbox" TextWrapping="Wrap" Margin="9,-7,0,0" Style="{ThemeResource HeaderTextBlockStyle}"/>
+            <TextBlock Text="Read All contacts with listbox" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12,0"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
