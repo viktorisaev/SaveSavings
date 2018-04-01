@@ -16,7 +16,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Read All contacts with listbox" TextWrapping="Wrap" Margin="9,-7,0,0" FontSize="28"/>
+            <TextBlock Text="Read All contacts with listbox" TextWrapping="Wrap" Margin="9,-7,0,0" Style="{ThemeResource HeaderTextBlockStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -30,23 +30,22 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Add Contact"  Margin="5" HorizontalAlignment="Stretch" Click="AddContact_Click"/>
-                <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="DeleteAll" Margin="5" HorizontalAlignment="Stretch" Click="DeleteAll_Click"/>
+                <Button Grid.Column="0" Name="btnAdd" Content="Add Contact" HorizontalAlignment="Stretch" Margin="5" Click="AddContact_Click"/>
+                <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="DeleteAll" HorizontalAlignment="Stretch" Margin="5" Click="DeleteAll_Click"/>
             </Grid>
-            <ListView BorderBrush="#FF141EE4"  Grid.Row="1" x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
+            <ListView BorderBrush="#FF141EE4" Grid.Row="1" x:Name="listBoxobj" SelectionChanged="listBoxobj_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Border Margin="5" BorderBrush="White" BorderThickness="1">
+                            <Border Margin="1" BorderBrush="{ThemeResource DefaultTextForegroundThemeBrush}" BorderThickness="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Margin="5,0,0,0" Grid.Row="0" x:Name="NameTxt" TextWrapping="Wrap" Text="{Binding Name}" FontSize="28" Foreground="White"/>
-                                    <TextBlock Grid.Row="0" Text=">" FontSize="28"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White"/>
-                                    <TextBlock Margin="5,0,0,0" Grid.Row="1" x:Name="PhoneTxt"  TextWrapping="Wrap" Foreground="White" FontSize="18" Text="{Binding PhoneNumber}" />
-                                    <!--<TextBlock HorizontalAlignment="Right" Margin="0,0,35,0" Grid.Row="3" x:Name="CreateddateTxt" Foreground="White" FontSize="18" TextWrapping="Wrap" Text="{Binding CreationDate}" />-->
+                                    <TextBlock Grid.Row="0" x:Name="NameTxt" TextWrapping="Wrap" Text="{Binding Name}" IsHitTestVisible="False" FontSize="{ThemeResource ComboBoxArrowThemeFontSize}" Margin="5,0,0,0" />
+                                    <TextBlock Grid.Row="0" Text=">" FontSize="28"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="1" x:Name="PhoneTxt" TextWrapping="Wrap" Text="{Binding PhoneNumber}" Margin="5,0,0,0" />
                                 </Grid>
                             </Border>
                         </Grid>
