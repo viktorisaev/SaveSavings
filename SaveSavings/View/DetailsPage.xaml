@@ -16,7 +16,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Delete/Update contact" FontSize="28" Margin="9,-7,0,0" />
+            <TextBlock Text="Delete/Update contact" Style="{ThemeResource HeaderTextBlockStyle}" Margin="9,-7,0,0" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

@@ -14,8 +14,8 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Add Contact" Margin="9,-7,0,0"/>
+        <StackPanel Grid.Row="0" Margin="{ThemeResource ContentDialogTitleMargin}">
+            <TextBlock Text="Add Contact" Style="{ThemeResource HeaderTextBlockStyle}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
