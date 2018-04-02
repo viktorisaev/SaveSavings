@@ -21,10 +21,10 @@ namespace SaveSavings
         private async void AddExpense_Click(object sender, RoutedEventArgs e)
         {
             DatabaseHelperClass Db_Helper = new DatabaseHelperClass();//Creating object for DatabaseHelperClass.cs from ViewModel/DatabaseHelperClass.cs    
-            if (NametxtBx.Text != "" & PhonetxtBx.Text != "")
+            if (PhonetxtBx.Text != "")
             {
                 // TODO: insert date
-                Db_Helper.Insert(new Spends(DateTime.Now,/*NametxtBx.Text*/ Int32.Parse(PhonetxtBx.Text)));
+                Db_Helper.Insert(new Spends(Date.Date.DateTime, Int32.Parse(PhonetxtBx.Text)));
                 Frame.Navigate(typeof(HomePage));//after add contact redirect to contact listbox page    
             }
             else
