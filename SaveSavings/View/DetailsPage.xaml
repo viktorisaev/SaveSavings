@@ -27,8 +27,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Name="EditView">
-                <TextBox Header="Name" Name="NametxtBx" Margin="10"/>
-                <TextBox Header="Phone" MaxLength="10" InputScope="Digits" Margin="10" Name="PhonetxtBx"/>
+                <DatePicker x:Name="w_DateOfExpense" Header="Date" Margin="10"/>
+                <TextBox x:Name="w_AmountOfExpense" Header="Amount" InputScope="CurrencyAmount" MaxLength="10" />
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <Button Content="Delete" HorizontalAlignment="Stretch" Margin="10" Click="DeleteContact_Click"/>

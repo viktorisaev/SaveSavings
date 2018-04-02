@@ -7,9 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace SaveSavings
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class AddContact : Page
     {
         public AddContact()
@@ -20,16 +18,27 @@ namespace SaveSavings
 
         private async void AddExpense_Click(object sender, RoutedEventArgs e)
         {
-            DatabaseHelperClass Db_Helper = new DatabaseHelperClass();//Creating object for DatabaseHelperClass.cs from ViewModel/DatabaseHelperClass.cs    
-            if (PhonetxtBx.Text != "")
+            DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
+            if (w_AmountOfExpense.Text != "")
             {
-                // TODO: insert date
-                Db_Helper.Insert(new Spends(Date.Date.DateTime, Int32.Parse(PhonetxtBx.Text)));
-                Frame.Navigate(typeof(HomePage));//after add contact redirect to contact listbox page    
+                try
+                {
+                    float amount = float.Parse(w_AmountOfExpense.Text);
+                    int valCents = (int)Math.Truncate(amount * 100.0f);
+
+                    Db_Helper.Insert(new Spends(w_DateOfExpense.Date.DateTime, valCents));
+                    Frame.Navigate(typeof(HomePage));
+                }
+                catch
+                {
+
+                }
+
+
             }
             else
             {
-                MessageDialog messageDialog = new MessageDialog("Please fill two fields");//Text should not be empty    
+                MessageDialog messageDialog = new MessageDialog("Please fill two fields");
                 await messageDialog.ShowAsync();
             }
         }

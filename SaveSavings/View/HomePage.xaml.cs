@@ -24,11 +24,17 @@ namespace SaveSavings
     public sealed partial class HomePage : Page
     {
         ObservableCollection<Spends> DB_ContactList = new ObservableCollection<Spends>();
+
+
+
         public HomePage()
         {
             this.InitializeComponent();
             this.Loaded += ReadContactList_Loaded;
         }
+
+
+
         private void ReadContactList_Loaded(object sender, RoutedEventArgs e)
         {
             ReadAllContactsList dbcontacts = new ReadAllContactsList();
@@ -37,10 +43,14 @@ namespace SaveSavings
             {
                 btnDelete.IsEnabled = true;
             }
-            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Id).ToList();//Binding DB data to LISTBOX and Latest contact ID can Display first.  
+
+            // set list data - recent dates first
+            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
         }
 
-        private void listBoxobj_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+
+        private void DateListItemSelected(object sender, SelectionChangedEventArgs e)
         {
             if (listBoxobj.SelectedIndex != -1)
             {
@@ -48,6 +58,8 @@ namespace SaveSavings
                 Frame.Navigate(typeof(DetailsPage), listitem);
             }
         }
+
+
 
         private void DeleteAll_Click(object sender, RoutedEventArgs e)
         {
@@ -57,10 +69,15 @@ namespace SaveSavings
             btnDelete.IsEnabled = false;
             listBoxobj.ItemsSource = DB_ContactList;
         }
+
+
+
         private void AddContact_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddContact));
         }
+
+
 
     }   // class HomePage
 }

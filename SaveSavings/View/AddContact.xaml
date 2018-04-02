@@ -21,10 +21,8 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-
-                <DatePicker x:Name="Date" Header="Date" Margin="10"/>
-                
-                <TextBox x:Name="PhonetxtBx" Header="Amount" InputScope="CurrencyAmount" Margin="10" />
+                <DatePicker x:Name="w_DateOfExpense" Header="Date" Margin="10"/>
+                <TextBox x:Name="w_AmountOfExpense" Header="Amount" InputScope="CurrencyAmount" Margin="10" />
                 <Button Content="Add Expense" Margin="10" HorizontalAlignment="Stretch" Click="AddExpense_Click"/>
             </StackPanel>
         </Grid>
