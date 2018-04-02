@@ -13,6 +13,19 @@ namespace SaveSavings
 
         public DateTime Date { get; set; }
 
+        [SQLite.Net.Attributes.Ignore]
+        public DateTime DateOnly
+        {
+            get
+            {
+                return Date.Date;
+            }
+            set
+            {
+
+            }
+        }
+
         public int Amount { get; set; }
 
 
@@ -26,6 +39,11 @@ namespace SaveSavings
         {
             this.Date = _Date;
             this.Amount = _Amount;
+        }
+
+        public DateTime GetDateOnly()
+        {
+            return this.Date.Date;
         }
 
     }   // class Spends

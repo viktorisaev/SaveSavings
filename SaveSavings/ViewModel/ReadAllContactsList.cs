@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace SaveSavings
 {
@@ -8,6 +9,11 @@ namespace SaveSavings
         public ObservableCollection<Spends> GetAllContacts()
         {
             return Db_Helper.ReadAllContacts();
+        }
+
+        internal ObservableCollection<Spends> GetDateContacts(DateTime date)
+        {
+            return Db_Helper.GetDateContacts(date);
         }
     }
 }

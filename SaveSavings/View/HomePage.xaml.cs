@@ -16,7 +16,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace SaveSavings
+namespace SaveSavings.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -39,10 +39,10 @@ namespace SaveSavings
         {
             ReadAllContactsList dbcontacts = new ReadAllContactsList();
             DB_ContactList = dbcontacts.GetAllContacts();//Get all DB contacts  
-            if (DB_ContactList.Count > 0)
-            {
-                btnDelete.IsEnabled = true;
-            }
+            //if (DB_ContactList.Count > 0)
+            //{
+            //    btnDelete.IsEnabled = true;
+            //}
 
             // set list data - recent dates first
             listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
@@ -55,20 +55,20 @@ namespace SaveSavings
             if (listBoxobj.SelectedIndex != -1)
             {
                 Spends listitem = listBoxobj.SelectedItem as Spends;//Get slected listbox item contact ID
-                Frame.Navigate(typeof(DetailsPage), listitem);
+                Frame.Navigate(typeof(DailyPage), listitem.Date);
             }
         }
 
 
 
-        private void DeleteAll_Click(object sender, RoutedEventArgs e)
-        {
-            DatabaseHelperClass delete = new DatabaseHelperClass();
-            delete.DeleteAllContact();//delete all DB contacts
-            DB_ContactList.Clear();//Clear collections
-            btnDelete.IsEnabled = false;
-            listBoxobj.ItemsSource = DB_ContactList;
-        }
+//        private void DeleteAll_Click(object sender, RoutedEventArgs e)
+//        {
+//            DatabaseHelperClass delete = new DatabaseHelperClass();
+//            delete.DeleteAllContact();//delete all DB contacts
+//            DB_ContactList.Clear();//Clear collections
+////            btnDelete.IsEnabled = false;
+//            listBoxobj.ItemsSource = DB_ContactList;
+//        }
 
 
 

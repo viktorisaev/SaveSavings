@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace SaveSavings
+namespace SaveSavings.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -46,7 +46,7 @@ namespace SaveSavings
             // parse widgets values to data
             currentExpense.Date = w_DateOfExpense.Date.DateTime;
             float amount = float.Parse(w_AmountOfExpense.Text);
-            int valCents = (int)Math.Truncate(amount * 100.0f);
+            int valCents = (int)Math.Round(amount * 100.0f);
             currentExpense.Amount = valCents;
 
             // store data
@@ -63,6 +63,8 @@ namespace SaveSavings
             Db_Helper.DeleteContact(currentExpense.Id);//Delete selected DB contact Id.
             Frame.Navigate(typeof(HomePage));
         }
+
+
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
@@ -87,5 +89,8 @@ namespace SaveSavings
             On_BackRequested();
             args.Handled = true;
         }
+
+
+
     }   // class DetailsPage 
 }

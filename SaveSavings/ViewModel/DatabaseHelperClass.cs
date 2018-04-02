@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SaveSavings
@@ -19,6 +20,9 @@ namespace SaveSavings
                 }
             }
         }
+
+
+
         private async Task<bool> CheckFileExists(string fileName)
         {
             try
@@ -54,6 +58,9 @@ namespace SaveSavings
         //    }
         //}
 
+
+
+
         public ObservableCollection<Spends> ReadAllContacts()
         {
             try
@@ -84,6 +91,39 @@ namespace SaveSavings
             }
 
         }
+
+
+
+        internal ObservableCollection<Spends> GetDateContacts(DateTime date)
+        {
+            // extract records for 'date'
+//            try
+            {
+                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+                {
+                    DateTime dateOnlyFrom = date.Date;
+                    DateTime dateOnlyTo = date.AddDays(1).Date;
+
+//                    Expression<Func<Spends, bool>> myExpression = ;
+
+                    List<Spends> myCollection = conn.Table<Spends>().Where( (v) => ( (v.Date >= dateOnlyFrom) && (v.Date < dateOnlyTo) ) ).ToList<Spends>();
+
+                    foreach (Spends s in myCollection)
+                    {
+                        s.Date = s.Date.ToLocalTime().Date;
+                    }
+
+                    ObservableCollection<Spends> ContactsList = new ObservableCollection<Spends>(myCollection);
+                    return ContactsList;
+                }
+            }
+            //catch
+            //{
+            //    return null;
+            //}
+        }
+
+
 
         //Update existing conatct   
         public void UpdateDetails(Spends ObjContact)

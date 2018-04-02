@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace SaveSavings
+namespace SaveSavings.View
 {
 
     public sealed partial class AddContact : Page
@@ -24,10 +24,10 @@ namespace SaveSavings
                 try
                 {
                     float amount = float.Parse(w_AmountOfExpense.Text);
-                    int valCents = (int)Math.Truncate(amount * 100.0f);
+                    int valCents = (int)Math.Round(amount * 100.0f);
 
                     Db_Helper.Insert(new Spends(w_DateOfExpense.Date.DateTime, valCents));
-                    Frame.Navigate(typeof(HomePage));
+                    Frame.Navigate(typeof(DailyPage), w_DateOfExpense.Date.DateTime);
                 }
                 catch
                 {
