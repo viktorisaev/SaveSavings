@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SaveSavings.ViewModel;
+using System;
+using System.Globalization;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,8 +25,7 @@ namespace SaveSavings.View
             {
                 try
                 {
-                    float amount = float.Parse(w_AmountOfExpense.Text);
-                    int valCents = (int)Math.Round(amount * 100.0f);
+                    int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
 
                     Db_Helper.Insert(new Spends(w_DateOfExpense.Date.DateTime, valCents));
                     Frame.Navigate(typeof(DailyPage), w_DateOfExpense.Date.DateTime);

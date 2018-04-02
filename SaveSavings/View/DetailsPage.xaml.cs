@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaveSavings.ViewModel;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -45,8 +46,7 @@ namespace SaveSavings.View
         {
             // parse widgets values to data
             currentExpense.Date = w_DateOfExpense.Date.DateTime;
-            float amount = float.Parse(w_AmountOfExpense.Text);
-            int valCents = (int)Math.Round(amount * 100.0f);
+            int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
             currentExpense.Amount = valCents;
 
             // store data

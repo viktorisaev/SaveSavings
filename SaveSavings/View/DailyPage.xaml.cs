@@ -46,6 +46,10 @@ namespace SaveSavings.View
             // back button
             BackButton.IsEnabled = Frame.CanGoBack;
 
+//            CultureInfo myCI = CultureInfo.CurrentCulture;
+//            w_DailyCurrentDate.Text = myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
+
+            // THIS IS PROPER CODE!!!
             w_DailyCurrentDate.Text = string.Format("{0:D}", date);
         }
 
