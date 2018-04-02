@@ -22,27 +22,17 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <Button x:Name="BackButton" Click="Back_Click" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
-            <TextBlock x:Name="w_DailyCurrentDate" Text="Jan 01 1987" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12,0"/>
+            <TextBlock x:Name="w_DailyCurrentDate" Text="Donnerstag, 31. December 2018" Style="{ThemeResource TitleTextBlockStyle}" Margin="12,0"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <!--buttons top-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="AddContact_Click"/>
-                <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="Delete All" HorizontalAlignment="Stretch" Margin="5" Click="DeleteAll_Click"/>
-            </Grid>
-
             <!--list-->
-            <ListView BorderBrush="#FF141EE4" Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">
+            <ListView Grid.Row="0" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -64,6 +54,17 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
+
+            <!--buttons bottom-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="AddContact_Click"/>
+                <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="Delete All" HorizontalAlignment="Stretch" Margin="5" Click="DeleteAll_Click"/>
+            </Grid>
+
 
         </Grid>
     </Grid>
