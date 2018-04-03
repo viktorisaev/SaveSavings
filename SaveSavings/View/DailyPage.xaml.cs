@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
@@ -125,33 +123,6 @@ namespace SaveSavings.View
 
 
     }   // class SingleDatePage
-
-
-
-
-
-    public class CurrencyAmountConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value == null)
-                return null;
-
-            var ss = string.Format("{0:C}", ((int)value) / 100.0f);
-
-            return ss;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-
-
-
 
 
 }   // namespace SaveSavings.View

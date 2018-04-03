@@ -5,11 +5,12 @@
     xmlns:local="using:SaveSavings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conv="using:SaveSavings.View"
+    xmlns:conv="using:SaveSavings.ViewModel"
     mc:Ignorable="d">
 
     <Page.Resources>
         <conv:CurrencyAmountConverter x:Name="CurrencyAmountConverter"/>
+        <conv:DateConverter x:Name="DateConverter"/>
     </Page.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -21,7 +22,7 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Read All contacts with listbox" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12,0"/>
+            <TextBlock Text="Expenses" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12,0"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -38,20 +39,16 @@
                 <Button Grid.Column="0" Grid.ColumnSpan="2" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="AddContact_Click"/>
             </Grid>
             
-            <ListView BorderBrush="#FF141EE4" Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">
+            <ListView Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Border Margin="1" BorderBrush="{ThemeResource DefaultTextForegroundThemeBrush}" BorderThickness="1">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" x:Name="NameTxt" TextWrapping="Wrap" Text="{Binding Date}" IsHitTestVisible="False" FontSize="{ThemeResource ComboBoxArrowThemeFontSize}" Margin="5,0,0,0" />
-                                    <TextBlock Grid.Row="1" x:Name="PhoneTxt" TextWrapping="Wrap" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" Margin="5,0,0,0" />
-                                </Grid>
-                            </Border>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" TextWrapping="Wrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
+                            <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

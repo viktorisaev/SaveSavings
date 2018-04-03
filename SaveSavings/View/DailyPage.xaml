@@ -5,7 +5,7 @@
     xmlns:local="using:SaveSavings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conv="using:SaveSavings.View"
+    xmlns:conv="using:SaveSavings.ViewModel"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -36,15 +36,13 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <Border Margin="1" BorderBrush="{ThemeResource DefaultTextForegroundThemeBrush}" BorderThickness="1">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" x:Name="NameTxt" TextWrapping="Wrap" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" IsHitTestVisible="False" FontSize="{ThemeResource ComboBoxArrowThemeFontSize}" Margin="5,0,0,0" />
-                                </Grid>
-                            </Border>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" x:Name="NameTxt" TextWrapping="Wrap" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" IsHitTestVisible="False" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" Margin="5,0,0,0" />
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
