@@ -42,17 +42,11 @@ namespace SaveSavings.View
         {
             DatabaseHelperClass db = new DatabaseHelperClass();
 
-            DB_ContactList = db.ReadAllContacts();//Get all DB contacts  
-            //if (DB_ContactList.Count > 0)
-            //{
-            //    btnDelete.IsEnabled = true;
-            //}
+            DB_ContactList = db.ReadAllContacts();
 
             TotalStatistics stats = db.GetTotalStatistics();
 
             w_TotalExpenses.Text = string.Format("{0:C}", stats.m_TotalExpenses / 100.0f);
-
-
 
             // set list data - recent dates first
             listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
@@ -68,17 +62,6 @@ namespace SaveSavings.View
                 Frame.Navigate(typeof(DailyPage), listitem.Date);
             }
         }
-
-
-
-//        private void DeleteAll_Click(object sender, RoutedEventArgs e)
-//        {
-//            DatabaseHelperClass delete = new DatabaseHelperClass();
-//            delete.DeleteAllContact();//delete all DB contacts
-//            DB_ContactList.Clear();//Clear collections
-////            btnDelete.IsEnabled = false;
-//            listBoxobj.ItemsSource = DB_ContactList;
-//        }
 
 
 

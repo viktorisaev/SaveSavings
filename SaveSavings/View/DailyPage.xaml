@@ -58,8 +58,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="AddContact_Click"/>
-                <Button Grid.Column="1" Name="btnDelete" IsEnabled="False" Content="Delete All" HorizontalAlignment="Stretch" Margin="5" Click="DeleteAll_Click"/>
+                <Button Grid.Column="0" Grid.ColumnSpan="2" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="10" Click="AddContact_Click"/>
             </Grid>
 
 
