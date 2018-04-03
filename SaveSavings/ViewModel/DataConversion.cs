@@ -8,7 +8,11 @@ namespace SaveSavings.ViewModel
     {
         public static int ConvertCurrencyStringToIntegerCents(string strValue)
         {
-            float amount = float.Parse(strValue, NumberStyles.Currency);
+            // patch decimal separator
+            strValue = strValue.Replace(',', '.'); // , => .
+            strValue = strValue.Replace('-', '.'); // - => .
+
+            float amount = float.Parse(strValue, NumberStyles.Currency, CultureInfo.InvariantCulture);  // invariant culture uses "."
             int valCents = (int)Math.Round(amount * 100.0f);
 
             return valCents;

@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+  
     <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,9 +22,10 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <DatePicker x:Name="w_DateOfExpense" Header="Date" Margin="10"/>
-                <TextBox x:Name="w_AmountOfExpense" Header="Amount" InputScope="CurrencyAmount" Margin="10" />
+                <DatePicker x:Name="w_DateOfExpense" Header="Date" Margin="10" TabIndex="2"/>
+                <TextBox x:Name="w_AmountOfExpense" Header="Amount" InputScope="CurrencyAmount" Margin="10" TabIndex="1" />
                 <Button Content="Add Expense" Margin="10" HorizontalAlignment="Stretch" Click="AddExpense_Click"/>
+                <TextBox x:Name="w_Localisation" Header="Loc" />
             </StackPanel>
         </Grid>
     </Grid>

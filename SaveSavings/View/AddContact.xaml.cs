@@ -38,7 +38,11 @@ namespace SaveSavings.View
             // TODO: back button
             //            BackButton.IsEnabled = Frame.CanGoBack;
 
-            w_AmountOfExpense.Focus(FocusState.Keyboard);
+            w_AmountOfExpense.Focus(FocusState.Programmatic);
+
+
+            CultureInfo myCI = CultureInfo.CurrentCulture;
+            w_Localisation.Text = myCI.Name + myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
         }
 
 
