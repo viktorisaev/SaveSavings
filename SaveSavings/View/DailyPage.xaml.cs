@@ -18,6 +18,7 @@ namespace SaveSavings.View
     public sealed partial class DailyPage : Page
     {
         ObservableCollection<Spends> DB_ContactList = new ObservableCollection<Spends>();
+        DateTime m_CurrentDate;
 
 
         public DailyPage()
@@ -30,11 +31,11 @@ namespace SaveSavings.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // parameter as data
-            DateTime date = (DateTime)e.Parameter;
+            // save current date passed at navigation
+            m_CurrentDate = (DateTime)e.Parameter;
 
             ReadAllContactsList dbcontacts = new ReadAllContactsList();
-            DB_ContactList = dbcontacts.GetDateContacts(date);//Get all DB contacts  
+            DB_ContactList = dbcontacts.GetDateContacts(m_CurrentDate);//Get all DB contacts  
             //if (DB_ContactList.Count > 0)
             //{
             //    btnDelete.IsEnabled = true;
@@ -50,7 +51,7 @@ namespace SaveSavings.View
 //            w_DailyCurrentDate.Text = myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
 
             // THIS IS PROPER CODE!!!
-            w_DailyCurrentDate.Text = string.Format("{0:D}", date);
+            w_DailyCurrentDate.Text = string.Format("{0:D}", m_CurrentDate);
         }
 
 
@@ -93,7 +94,7 @@ namespace SaveSavings.View
 
         private void AddContact_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AddContact));
+            Frame.Navigate(typeof(AddContact), m_CurrentDate);
         }
 
 

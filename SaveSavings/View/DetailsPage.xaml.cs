@@ -38,6 +38,8 @@ namespace SaveSavings.View
 
             // back button
             BackButton.IsEnabled = Frame.CanGoBack;
+
+            w_AmountOfExpense.Focus(FocusState.Keyboard);
         }
 
 
