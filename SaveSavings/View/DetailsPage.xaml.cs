@@ -1,5 +1,6 @@
 ﻿using SaveSavings.ViewModel;
 using System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -23,6 +24,9 @@ namespace SaveSavings.View
         public DetailsPage()
         {
             this.InitializeComponent();
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
 
@@ -35,9 +39,6 @@ namespace SaveSavings.View
             // fill data into widgets
             w_DateOfExpense.Date = new DateTimeOffset(currentExpense.Date);
             w_AmountOfExpense.Text = (currentExpense.Amount / 100.0f).ToString();
-
-            // back button
-            BackButton.IsEnabled = Frame.CanGoBack;
 
             w_AmountOfExpense.Focus(FocusState.Keyboard);
         }
@@ -90,6 +91,14 @@ namespace SaveSavings.View
         {
             On_BackRequested();
             args.Handled = true;
+        }
+
+
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Back_Click(sender, null);
+            e.Handled = true;
         }
 
 

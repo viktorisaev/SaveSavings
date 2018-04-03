@@ -1,9 +1,11 @@
 ﻿using SaveSavings.ViewModel;
 using System;
 using System.Globalization;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -16,6 +18,9 @@ namespace SaveSavings.View
         public AddContact()
         {
             this.InitializeComponent();
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
 
@@ -64,6 +69,38 @@ namespace SaveSavings.View
         }
 
 
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            On_BackRequested();
+        }
+
+
+
+        // Handles system-level BackRequested events and page-level back button Click events
+        private bool On_BackRequested()
+        {
+            if (this.Frame.CanGoBack)
+            {
+                this.Frame.GoBack();
+                return true;
+            }
+            return false;
+        }
+
+        private void BackInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            On_BackRequested();
+            args.Handled = true;
+        }
+
+
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Back_Click(sender, null);
+            e.Handled = true;
+        }
 
     }
 }

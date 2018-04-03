@@ -21,7 +21,6 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <Button x:Name="BackButton" Click="Back_Click" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
             <TextBlock x:Name="w_DailyCurrentDate" Text="Donnerstag, 31. December 2018" Style="{ThemeResource TitleTextBlockStyle}" Margin="12,0"/>
         </StackPanel>
 

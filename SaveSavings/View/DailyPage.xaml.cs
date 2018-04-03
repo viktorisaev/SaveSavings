@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -22,7 +23,9 @@ namespace SaveSavings.View
         public DailyPage()
         {
             this.InitializeComponent();
-//            this.Loaded += ReadContactList_Loaded;
+            //            this.Loaded += ReadContactList_Loaded;
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
 
@@ -41,9 +44,6 @@ namespace SaveSavings.View
 
             // set list data - recent dates first
             listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
-
-            // back button
-            BackButton.IsEnabled = Frame.CanGoBack;
 
 //            CultureInfo myCI = CultureInfo.CurrentCulture;
 //            w_DailyCurrentDate.Text = myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
@@ -121,6 +121,13 @@ namespace SaveSavings.View
             args.Handled = true;
         }
 
+
+
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            Back_Click(sender, null);
+            e.Handled = true;
+        }
 
     }   // class SingleDatePage
 
