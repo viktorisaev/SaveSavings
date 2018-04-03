@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace SaveSavings
 {
+
+
+    class TotalStatistics
+    {
+        public int m_TotalExpenses;
+    }
+
+
+
     class DatabaseHelperClass
     {
         //Create Tabble   
@@ -89,7 +98,28 @@ namespace SaveSavings
             {
                 return null;
             }
+        }
 
+
+
+
+        public TotalStatistics GetTotalStatistics()
+        {
+            TotalStatistics stats = new TotalStatistics();
+
+            try
+            {
+                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+                {
+                    // total spent
+                    stats.m_TotalExpenses = conn.Table<Spends>().Sum( v => v.Amount);
+                }
+            }
+            catch
+            {
+            }
+
+            return stats;
         }
 
 

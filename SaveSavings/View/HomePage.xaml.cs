@@ -40,12 +40,19 @@ namespace SaveSavings.View
 
         private void ReadContactList_Loaded(object sender, RoutedEventArgs e)
         {
-            ReadAllContactsList dbcontacts = new ReadAllContactsList();
-            DB_ContactList = dbcontacts.GetAllContacts();//Get all DB contacts  
+            DatabaseHelperClass db = new DatabaseHelperClass();
+
+            DB_ContactList = db.ReadAllContacts();//Get all DB contacts  
             //if (DB_ContactList.Count > 0)
             //{
             //    btnDelete.IsEnabled = true;
             //}
+
+            TotalStatistics stats = db.GetTotalStatistics();
+
+            w_TotalExpenses.Text = string.Format("{0:C}", stats.m_TotalExpenses / 100.0f);
+
+
 
             // set list data - recent dates first
             listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
