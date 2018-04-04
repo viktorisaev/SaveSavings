@@ -5,6 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
+using SaveSavings.Model;
+using SaveSavings.ViewModel;
+
 namespace SaveSavings
 {
 
@@ -124,7 +127,7 @@ namespace SaveSavings
 
 
 
-        internal ObservableCollection<Spends> GetDateContacts(DateTime date)
+        internal ObservableCollection<Spends> GetAmountsForDate(DateTime date)
         {
             // extract records for 'date'
 //            try
@@ -204,5 +207,13 @@ namespace SaveSavings
                 }
             }
         }
+
+
+
+        public RegularsVM GetRegulars()
+        {
+            return new RegularsVM();
+        }
+
     }
 }

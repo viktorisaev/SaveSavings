@@ -5,7 +5,7 @@
     xmlns:local="using:SaveSavings"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:conv="using:SaveSavings.ViewModel"
+    xmlns:conv="using:SaveSavings.Converters"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -37,7 +37,12 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="2" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="AddContact_Click"/>
+
+
+                <StackPanel Grid.Column="0" >
+                    <Button Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="OnAddExpense_Clicked"/>
+                    <Button Content="See Regulars" HorizontalAlignment="Stretch" Margin="5" Click="OnSeeRegulars_Clicked"/>
+                </StackPanel>
             </Grid>
             
             <ListView Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">

@@ -1,0 +1,39 @@
+﻿<ViewModel:RegularsVM xmlns:ViewModel="using:SaveSavings.ViewModel">
+
+    <ViewModel:RegularsVM.TotalDailyIncome>4575</ViewModel:RegularsVM.TotalDailyIncome>
+
+    <ViewModel:RegularsVM.TotalIncome>2878</ViewModel:RegularsVM.TotalIncome>
+
+    <ViewModel:RegularsVM.TotalSpends>1578</ViewModel:RegularsVM.TotalSpends>
+
+    <ViewModel:RegularsVM.Incomes>
+
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="854" Name="Salary" PerPeriod="per year"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="3534" Name="Class aliquam aenean" PerPeriod="per year"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="453" Name="Class aliquam aenean" PerPeriod="per year"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="553" Name="Class aliquam aenean" PerPeriod="per year"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="1053" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="753" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="654" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="555" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="456" Name="Class aliquam aenean"/>
+
+    </ViewModel:RegularsVM.Incomes>
+
+
+    <ViewModel:RegularsVM.Spends>
+
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="355" Name="Class aliquam aenean" PerPeriod="per year"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="653" Name="Class aliquam aenean" PerPeriod="per year"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="1557" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="756" Name="Class aliquam aenean" PerPeriod="per year"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="855" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="754" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="1656" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="455" Name="Class aliquam aenean"/>
+        <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="537" Name="Class aliquam aenean"/>
+
+    </ViewModel:RegularsVM.Spends>
+
+
+</ViewModel:RegularsVM>

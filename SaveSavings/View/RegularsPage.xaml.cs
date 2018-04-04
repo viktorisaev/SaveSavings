@@ -1,10 +1,20 @@
-﻿using SaveSavings.Converters;
-using SaveSavings.Model;
-using System;
-using Windows.UI.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
+using SaveSavings.ViewModel;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -13,15 +23,9 @@ namespace SaveSavings.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DetailsPage : Page
+    public sealed partial class RegularsPage : Page
     {
-        DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
-
-        Spends currentExpense = new Spends();
-
-
-
-        public DetailsPage()
+        public RegularsPage()
         {
             this.InitializeComponent();
 
@@ -30,43 +34,25 @@ namespace SaveSavings.View
         }
 
 
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // parameter as data
-            currentExpense = e.Parameter as Spends;
+            // save current date passed at navigation
+//            m_CurrentDate = (DateTime)e.Parameter;
 
-            // fill data into widgets
-            w_DateOfExpense.Date = new DateTimeOffset(currentExpense.Date);
-            w_AmountOfExpense.Text = (currentExpense.Amount / 100.0f).ToString();
+            DataFromStorage dbcontacts = new DataFromStorage();
+            RegularsVM regularsVM = dbcontacts.GetRegulars();   //Get regulars
 
-            w_AmountOfExpense.Focus(FocusState.Keyboard);
+            // set data (ad execute bindings)
+            this.DataContext = regularsVM;
+
+//            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
+
+            //            CultureInfo myCI = CultureInfo.CurrentCulture;
+            //            w_DailyCurrentDate.Text = myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
+
+            // THIS IS PROPER CODE!!!
+//            w_DailyCurrentDate.Text = string.Format("{0:D}", m_CurrentDate);
         }
-
-
-
-        private void UpdateContact_Click(object sender, RoutedEventArgs e)
-        {
-            // parse widgets values to data
-            currentExpense.Date = w_DateOfExpense.Date.DateTime;
-            int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
-            currentExpense.Amount = valCents;
-
-            // store data
-            Db_Helper.UpdateDetails(currentExpense);//Update selected DB contact Id
-
-            // interface transition
-            Frame.Navigate(typeof(HomePage));
-        }
-
-
-
-        private void DeleteContact_Click(object sender, RoutedEventArgs e)
-        {
-            Db_Helper.DeleteContact(currentExpense.Id);//Delete selected DB contact Id.
-            Frame.Navigate(typeof(HomePage));
-        }
-
 
 
         private void Back_Click(object sender, RoutedEventArgs e)
@@ -103,5 +89,5 @@ namespace SaveSavings.View
 
 
 
-    }   // class DetailsPage 
+    }
 }

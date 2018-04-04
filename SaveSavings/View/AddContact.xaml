@@ -24,6 +24,7 @@
             <StackPanel>
                 <DatePicker x:Name="w_DateOfExpense" Header="Date" Margin="10" TabIndex="2"/>
                 <TextBox x:Name="w_AmountOfExpense" Header="Amount" InputScope="CurrencyAmount" Margin="10" TabIndex="1" />
+                <Rectangle Stroke="{ThemeResource ApplicationForegroundThemeBrush}" Height="2" />
                 <Button Content="Add Expense" Margin="20" Padding="10" HorizontalAlignment="Stretch" Click="AddExpense_Click"/>
                 <TextBox x:Name="w_Localisation" Header="Loc" VerticalAlignment="Bottom"/>
             </StackPanel>

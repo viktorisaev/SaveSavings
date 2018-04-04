@@ -1,0 +1,135 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SaveSavings"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:SaveSavings.Converters"
+    xmlns:vm="using:SaveSavings.ViewModel"
+    x:Class="SaveSavings.View.RegularsPage"
+    mc:Ignorable="d" d:DataContext="{d:DesignData /SampleData/RegularsVMSampleData.xaml}" 
+    >
+
+    <Page.Resources>
+        <vm:RegularsVM x:Key="RegularsVMDataSource" d:IsDataSource="True"/>
+        <conv:CurrencyAmountConverter x:Name="CurrencyAmountConverter"/>
+
+        <Style x:Key="IncomesTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextBlockStyle}">
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style x:Key="SpendsTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextBlockStyle}">
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <DataTemplate x:Key="ListVisualTemplate">
+            <Grid Margin="0,7,0,7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <TextBlock Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" />
+                    <TextBlock Grid.Column="1" Text="{Binding PerPeriod}" HorizontalAlignment="Left" FontSize="{ThemeResource ToolTipContentThemeFontSize}"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="{Binding Name}" FontSize="{ThemeResource TextStyleLargeFontSize}" VerticalAlignment="Center"/>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <!--TitlePanel contains the name of the application and page title-->
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <!-- split 50/50 vertically -->
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,0,5,10">
+            <TextBlock Text="Regulars:" Style="{ThemeResource TitleTextBlockStyle}" Margin="5,0,20,0"/>
+            <TextBlock Text="{Binding TotalDailyIncome, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource TitleTextBlockStyle}"/>
+            <TextBlock Text="per day" Style="{ThemeResource TitleTextBlockStyle}" Margin="5,0,0,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1"   Margin="10,0,10,0">
+            <Grid.RowDefinitions>
+                <!-- split 50/50 vertically -->
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Border Grid.Row="0" BorderBrush="ForestGreen" BorderThickness="2" Margin="0,0,0,5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!-- header + list + button -->
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                   <StackPanel Grid.Row="0" Orientation="Horizontal" Background="ForestGreen">
+                        <TextBlock Text="Incomes:" Style="{ThemeResource IncomesTextBlockStyle}"  Margin="10,0,20,0" />
+                        <TextBlock Text="{Binding TotalIncome, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource IncomesTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <!--list-->
+                    <ListView Grid.Row="1" x:Name="w_IncomesListBox" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Incomes}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                    <Button Grid.Row="2" x:Name="w_AddIncomesButton" Content="Add Income" HorizontalAlignment="Stretch" />
+
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Row="1" BorderBrush="DarkRed" BorderThickness="2" Margin="0,0,0,5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!-- header + list + button -->
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Background="DarkRed" >
+                        <TextBlock Text="Spends:" Style="{ThemeResource SpendsTextBlockStyle}"  Margin="10,0,20,0" />
+                        <TextBlock Text="{Binding TotalSpends, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SpendsTextBlockStyle}"/>
+                    </StackPanel>
+
+                    <!--list-->
+                    <ListView Grid.Row="1" x:Name="w_SpendsListBox" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Spends}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                    <Button Grid.Row="2" x:Name="w_AddSpendButton" Content="Add Spend" HorizontalAlignment="Stretch" />
+
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+
+
+
+</Page>

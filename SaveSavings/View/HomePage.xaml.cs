@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using SaveSavings.Model;
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace SaveSavings.View
@@ -65,12 +67,17 @@ namespace SaveSavings.View
 
 
 
-        private void AddContact_Click(object sender, RoutedEventArgs e)
+        private void OnAddExpense_Clicked(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddContact));
         }
 
 
+        // TODO: pivot?
+        private void OnSeeRegulars_Clicked(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(RegularsPage));
+        }
 
     }   // class HomePage
 }

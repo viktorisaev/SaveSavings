@@ -1,42 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SaveSavings.Model
 {
-    public class Spends
+
+    enum REGULARS_PERIOD
+    {
+        MONTHLY = 0,
+        YEARLY
+    }
+
+
+    class Regulars
     {
         //The Id property is marked as the Primary Key  
         [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int Id { get; set; }
 
-        public DateTime Date { get; set; }
-
         public int Amount { get; set; }
 
+        public REGULARS_PERIOD Period { get; set; }
 
-        public Spends()
+        public Regulars()
         {
             //empty constructor  
         }
 
 
-        public Spends(DateTime _Date, int _Amount)
+        public Regulars(REGULARS_PERIOD _Period, int _Amount)
         {
-            this.Date = _Date;
+            this.Period = _Period;
             this.Amount = _Amount;
         }
 
-        public DateTime GetDateOnly()
-        {
-            return this.Date.Date;
-        }
-
-    }   // class Spends
-
-}   // namespace SaveSavings
-
-
-
-
+    }
+}
