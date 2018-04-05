@@ -13,16 +13,45 @@ namespace SaveSavings
         DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
 
 
-        public ObservableCollection<Spends> GetAllContacts()
+        //public ObservableCollection<Spends> GetAllContacts()
+        //{
+        //    return Db_Helper.ReadAllContacts();
+        //}
+
+
+        internal ObservableCollection<ExpenseVM> GetDateContacts(DateTime date)
         {
-            return Db_Helper.ReadAllContacts();
+            List<Spends> spends = Db_Helper.GetAmountsForDate(date);
+
+            ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
+
+            foreach(Spends spend in spends)
+            {
+                expenses.Add(new ExpenseVM(spend));
+            }
+
+            return expenses;
+
         }
 
 
-        internal ObservableCollection<Spends> GetDateContacts(DateTime date)
+
+        internal ObservableCollection<ExpenseVM> GetAllExpenses()
         {
-            return Db_Helper.GetAmountsForDate(date);
+            List<Spends> spends = Db_Helper.GetAllExpenses();
+
+            ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
+
+            foreach (Spends spend in spends)
+            {
+                expenses.Add(new ExpenseVM(spend));
+            }
+
+            return expenses;
+
         }
+
+
 
 
         string[] StubNames =
@@ -51,23 +80,14 @@ namespace SaveSavings
             List<RegularItemVM> lst = new List<RegularItemVM>();
             for (int i = 0, ei = rnd.Next(3,10); i < ei; ++i)
             {
-                lst.Add(new RegularItemVM() {
-                    Amount=rnd.Next(20, 200000),
-                    Name = StubNames[rnd.Next(0, StubNames.Length)],
-                    PerPeriod =rnd.Next(0,2) == 0 ? "per year" : "per month"
-                });
+                lst.Add(new RegularItemVM(StubNames[rnd.Next(0, StubNames.Length)], rnd.Next(20, 200000), rnd.Next(0, 2) == 0 ));
             }
             regularsVM.SetIncomes(lst);
 
             lst = new List<RegularItemVM>();
             for (int i = 0, ei = rnd.Next(3, 10); i < ei; ++i)
             {
-                lst.Add(new RegularItemVM()
-                {
-                    Amount = rnd.Next(20, 4000),
-                    Name = StubNames[rnd.Next(0, StubNames.Length)],
-                    PerPeriod = rnd.Next(0, 2) == 0 ? "per year" : "per month"
-                });
+                lst.Add(new RegularItemVM(StubNames[rnd.Next(0, StubNames.Length)], rnd.Next(20, 10000), rnd.Next(0, 2) == 0));
             }
             regularsVM.SetSpends(lst);
 

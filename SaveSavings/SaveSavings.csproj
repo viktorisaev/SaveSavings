@@ -92,8 +92,12 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Model\Regulars.cs" />
+    <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Helpers\DelegateCommand.cs" />
+    <Compile Include="Model\RegularItem.cs" />
     <Compile Include="Converters\DataConversion.cs" />
+    <Compile Include="ViewModel\EditRegularItemVM.cs" />
+    <Compile Include="ViewModel\ExpenseVM.cs" />
     <Compile Include="ViewModel\RegularsVM.cs" />
     <Compile Include="View\AddContact.xaml.cs">
       <DependentUpon>AddContact.xaml</DependentUpon>
@@ -102,9 +106,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Spends.cs" />
-    <Compile Include="ViewModel\DatabaseHelperClass.cs" />
+    <Compile Include="Database\DatabaseHelperClass.cs" />
     <Compile Include="View\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditRegular.xaml.cs">
+      <DependentUpon>EditRegular.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -143,11 +150,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <DesignData Include="SampleData\EditRegularItemSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
     <Page Include="View\AddContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditRegular.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

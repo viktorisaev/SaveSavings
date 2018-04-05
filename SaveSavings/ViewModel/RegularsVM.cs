@@ -18,8 +18,17 @@ namespace SaveSavings.ViewModel
     public class RegularItemVM
     {
         public string Name { get; internal set; }
-        public int Amount { get; internal set; }
+        public float Amount { get; internal set; }
         public string PerPeriod { get; internal set; }
+        public string PerPeriodIndex { get; internal set; }
+
+        public RegularItemVM(string _Name, int _Amount, bool _IsMonthly)
+        {
+            this.Name = _Name;
+            this.Amount = _Amount / 100.0f;
+            this.PerPeriod = _IsMonthly ? "per month" : "per year";
+            this.PerPeriodIndex = _IsMonthly ? "0" : "1";
+        }
     }
 
 

@@ -1,5 +1,6 @@
 ﻿using SaveSavings.Converters;
 using SaveSavings.Model;
+using SaveSavings.ViewModel;
 using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -17,7 +18,7 @@ namespace SaveSavings.View
     {
         DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
 
-        Spends currentExpense = new Spends();
+        ExpenseVM m_CurrentExpense = null;
 
 
 
@@ -34,11 +35,11 @@ namespace SaveSavings.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // parameter as data
-            currentExpense = e.Parameter as Spends;
+            m_CurrentExpense = e.Parameter as ExpenseVM;
 
             // fill data into widgets
-            w_DateOfExpense.Date = new DateTimeOffset(currentExpense.Date);
-            w_AmountOfExpense.Text = (currentExpense.Amount / 100.0f).ToString();
+            w_DateOfExpense.Date = new DateTimeOffset(m_CurrentExpense.Date);
+            w_AmountOfExpense.Text = m_CurrentExpense.Amount.ToString();
 
             w_AmountOfExpense.Focus(FocusState.Keyboard);
         }
@@ -48,12 +49,12 @@ namespace SaveSavings.View
         private void UpdateContact_Click(object sender, RoutedEventArgs e)
         {
             // parse widgets values to data
-            currentExpense.Date = w_DateOfExpense.Date.DateTime;
+            m_CurrentExpense.Date = w_DateOfExpense.Date.DateTime;
             int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
-            currentExpense.Amount = valCents;
 
             // store data
-            Db_Helper.UpdateDetails(currentExpense);//Update selected DB contact Id
+            Spends spend = new Spends(m_CurrentExpense.Id, m_CurrentExpense.Date, valCents);
+            Db_Helper.UpdateDetails(spend);//Update selected DB contact Id
 
             // interface transition
             Frame.Navigate(typeof(HomePage));
@@ -63,7 +64,7 @@ namespace SaveSavings.View
 
         private void DeleteContact_Click(object sender, RoutedEventArgs e)
         {
-            Db_Helper.DeleteContact(currentExpense.Id);//Delete selected DB contact Id.
+            Db_Helper.DeleteContact(m_CurrentExpense.Id);//Delete selected DB contact Id.
             Frame.Navigate(typeof(HomePage));
         }
 

@@ -40,7 +40,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" x:Name="NameTxt" TextWrapping="Wrap" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" IsHitTestVisible="False" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" Margin="5,0,0,0" />
+                                <TextBlock Grid.Row="0" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" Margin="5,0,0,0" TextWrapping="Wrap" />
                             </Grid>
                         </Grid>
                     </DataTemplate>

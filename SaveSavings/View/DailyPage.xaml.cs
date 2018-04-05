@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 using SaveSavings.Model;
+using SaveSavings.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -18,7 +19,7 @@ namespace SaveSavings.View
     /// </summary>
     public sealed partial class DailyPage : Page
     {
-        ObservableCollection<Spends> DB_ContactList = new ObservableCollection<Spends>();
+        ObservableCollection<ExpenseVM> DB_ContactList = new ObservableCollection<ExpenseVM>();
         DateTime m_CurrentDate;
 
 
@@ -74,7 +75,7 @@ namespace SaveSavings.View
         {
             if (listBoxobj.SelectedIndex != -1)
             {
-                Spends listitem = listBoxobj.SelectedItem as Spends;//Get slected listbox item contact ID
+                ExpenseVM listitem = listBoxobj.SelectedItem as ExpenseVM;//Get slected listbox item contact ID
                 Frame.Navigate(typeof(DetailsPage), listitem);
             }
         }

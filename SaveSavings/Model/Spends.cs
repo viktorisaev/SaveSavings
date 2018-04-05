@@ -22,15 +22,11 @@ namespace SaveSavings.Model
         }
 
 
-        public Spends(DateTime _Date, int _Amount)
+        public Spends(int _Id, DateTime _Date, int _Amount)
         {
+            this.Id = _Id;
             this.Date = _Date;
             this.Amount = _Amount;
-        }
-
-        public DateTime GetDateOnly()
-        {
-            return this.Date.Date;
         }
 
     }   // class Spends

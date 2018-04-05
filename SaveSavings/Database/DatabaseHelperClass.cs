@@ -73,7 +73,7 @@ namespace SaveSavings
 
 
 
-        public ObservableCollection<Spends> ReadAllContacts()
+        public List<Spends> GetAllExpenses()
         {
             try
             {
@@ -88,13 +88,11 @@ namespace SaveSavings
 
 
                     var tt = (from r in myCollection
-                              group r by r.Date into g
-                              select new Spends { Date = g.Key, Amount = g.Sum( (t)=>(t.Amount) ) }
-//                              select r
+                                       group r by r.Date into g
+                                       select new Spends { Id = 0, Date = g.Key, Amount = g.Sum((t) => (t.Amount)) }
                               );
 
-                    ObservableCollection<Spends> ContactsList = new ObservableCollection<Spends>(tt);
-                    return ContactsList;
+                    return tt.ToList<Spends>();
                 }
             }
             catch
@@ -127,7 +125,7 @@ namespace SaveSavings
 
 
 
-        internal ObservableCollection<Spends> GetAmountsForDate(DateTime date)
+        internal List<Spends> GetAmountsForDate(DateTime date)
         {
             // extract records for 'date'
 //            try
@@ -146,8 +144,7 @@ namespace SaveSavings
                         s.Date = s.Date.ToLocalTime().Date;
                     }
 
-                    ObservableCollection<Spends> ContactsList = new ObservableCollection<Spends>(myCollection);
-                    return ContactsList;
+                    return myCollection;
                 }
             }
             //catch

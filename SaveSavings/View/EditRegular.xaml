@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="SaveSavings.View.EditRegular"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SaveSavings.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="using:SaveSavings.Converters"
+    xmlns:vm="using:SaveSavings.ViewModel"
+    xmlns:sys="using:System"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignData /SampleData/EditRegularItemSampleData.xaml}"
+    >
+
+    <Page.Resources>
+        <conv:RadioButtonConverter x:Key="RadioButtonConverter"/>
+        <vm:EditRegularItemVM x:Key="EditRegularItemDataSource" d:IsDataSource="True"/>
+    </Page.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Background="{Binding HeaderColor}">
+            <TextBlock Text="{Binding Header}" Margin="12,0" Style="{ThemeResource HeaderTextBlockStyle}" Foreground="White"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <TextBox Text="{Binding RegularItem.Name}" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
+                <TextBox Text="{Binding RegularItem.Amount}" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
+                <Grid Margin="10" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Grid.Column="0" Content="Per Month" HorizontalAlignment="Center" IsChecked="{Binding RegularItem.PerPeriodIndex, ConverterParameter=0, Converter={StaticResource RadioButtonConverter}, Mode=OneWay}"/>
+                    <RadioButton Grid.Column="1" Content="Per Year" HorizontalAlignment="Center" IsChecked="{Binding RegularItem.PerPeriodIndex, ConverterParameter=1, Converter={StaticResource RadioButtonConverter}, Mode=OneWay}"/>
+                </Grid>
+                <Button Content="{Binding EditButtonText}" Margin="20,40,20,20" Padding="20" HorizontalAlignment="Stretch" Command="{Binding EditCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+    
+</Page>

@@ -1,0 +1,21 @@
+﻿<ViewModel:EditRegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel">
+    <ViewModel:EditRegularItemVM.EditButtonText>
+        Add Expense
+    </ViewModel:EditRegularItemVM.EditButtonText>
+    <ViewModel:EditRegularItemVM.Header>
+        Add Income
+    </ViewModel:EditRegularItemVM.Header>
+
+    <ViewModel:EditRegularItemVM.HeaderColor>
+        Green
+    </ViewModel:EditRegularItemVM.HeaderColor>
+    
+    
+    <ViewModel:EditRegularItemVM.RegularItem>
+        <ViewModel:RegularItemVM>
+            <ViewModel:RegularItemVM.Amount>12.34</ViewModel:RegularItemVM.Amount>
+            <ViewModel:RegularItemVM.Name>ARD very cute</ViewModel:RegularItemVM.Name>
+            <ViewModel:RegularItemVM.PerPeriod>1</ViewModel:RegularItemVM.PerPeriod>
+        </ViewModel:RegularItemVM>
+    </ViewModel:EditRegularItemVM.RegularItem>
+</ViewModel:EditRegularItemVM>

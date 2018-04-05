@@ -87,7 +87,23 @@ namespace SaveSavings.View
             e.Handled = true;
         }
 
+        private void AddIncome_Clicked(object sender, RoutedEventArgs e)
+        {
+            GotoEditRegularPage(true, true, new RegularItemVM("ARD soft pillow", 1265, true));
+        }
 
+        private void AddExpense_Clicked(object sender, RoutedEventArgs e)
+        {
+            GotoEditRegularPage(false, true, new RegularItemVM("massage locion", 762, false));
+        }
 
+        private void GotoEditRegularPage(bool _IsIncome, bool _IsAdd, RegularItemVM _RegularItemVM)
+        {
+            // create VM
+            EditRegularItemVM editRegularItem = new EditRegularItemVM(_IsIncome, _IsAdd, _RegularItemVM);
+
+            // jump to the EditRegular page
+            this.Frame.Navigate(typeof(EditRegular), editRegularItem);
+        }
     }
 }

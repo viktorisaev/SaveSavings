@@ -29,7 +29,7 @@ namespace SaveSavings.Converters
             if (value == null)
                 return null;
 
-            var ss = string.Format("{0:C}", ((int)value) / 100.0f);
+            var ss = string.Format("{0:C}", value);
 
             return ss;
         }
@@ -39,6 +39,26 @@ namespace SaveSavings.Converters
             throw new NotImplementedException();
         }
     }
+
+
+
+
+    public class RadioButtonConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value == null)
+                return false;
+
+            return (string)value == (string)parameter;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return null;
+        }
+    }
+
 
 
 

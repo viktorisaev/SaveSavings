@@ -83,7 +83,7 @@
                     </StackPanel>
 
                     <!--list-->
-                    <ListView Grid.Row="1" x:Name="w_IncomesListBox" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Incomes}">
+                    <ListView Grid.Row="1" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Incomes}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -91,7 +91,7 @@
                         </ListView.ItemContainerStyle>
                     </ListView>
 
-                    <Button Grid.Row="2" x:Name="w_AddIncomesButton" Content="Add Income" HorizontalAlignment="Stretch" />
+                    <Button Grid.Row="2" Content="Add Income" HorizontalAlignment="Stretch" Padding="10" Click="AddIncome_Clicked" />
 
                 </Grid>
             </Border>
@@ -114,7 +114,7 @@
                     </StackPanel>
 
                     <!--list-->
-                    <ListView Grid.Row="1" x:Name="w_SpendsListBox" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Spends}">
+                    <ListView Grid.Row="1" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Spends}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -122,7 +122,7 @@
                         </ListView.ItemContainerStyle>
                     </ListView>
 
-                    <Button Grid.Row="2" x:Name="w_AddSpendButton" Content="Add Spend" HorizontalAlignment="Stretch" />
+                    <Button Grid.Row="2" Content="Add Spend" HorizontalAlignment="Stretch" Padding="10" Click="AddExpense_Clicked" />
 
                 </Grid>
             </Border>

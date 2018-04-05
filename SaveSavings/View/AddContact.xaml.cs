@@ -58,7 +58,7 @@ namespace SaveSavings.View
                 {
                     int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
 
-                    Db_Helper.Insert(new Spends(w_DateOfExpense.Date.DateTime, valCents));
+                    Db_Helper.Insert(new Spends(0, w_DateOfExpense.Date.DateTime, valCents));
                     Frame.Navigate(typeof(DailyPage), w_DateOfExpense.Date.DateTime);
                 }
                 catch
