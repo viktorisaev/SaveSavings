@@ -1,4 +1,5 @@
-﻿using SQLite.Net;
+﻿using SaveSavings.Helpers;
+using SQLite.Net;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -20,6 +21,10 @@ namespace SaveSavings
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+
+
+            // for navigation from ViewModel (say, with a DelegateCommand)
+        public static NavigationService NavigationService;
 
 
         public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "ContactsManager2.sqlite"));//DataBase Name 
@@ -52,6 +57,7 @@ namespace SaveSavings
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                App.NavigationService = new NavigationService(rootFrame);   // NAVIGATION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
