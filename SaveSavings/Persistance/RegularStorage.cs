@@ -19,7 +19,7 @@ namespace SaveSavings.Persistance   // this is MODEL, not ViewModel
                 {
                     // 1) request SQL table data
                     // RegularItem = model
-                    var regulars = conn.Table<RegularItem>();   // of type TableQuery<T>, BaseTableQuery, IEnumerable<T>, IEnumerable
+                    var regulars = conn.Table<RegularItem>().OrderBy( o => o.Amount );   // of type TableQuery<T>, BaseTableQuery, IEnumerable<T>, IEnumerable
 
                     // 2) process each record
 
