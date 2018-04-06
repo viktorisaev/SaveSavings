@@ -19,6 +19,17 @@ namespace SaveSavings.Converters
         }
 
 
+        public static bool CanConvertCurrencyStringToIntegerCents(string strValue)
+        {
+            // patch decimal separator
+            strValue = strValue.Replace(',', '.'); // , => .
+            strValue = strValue.Replace('-', '.'); // - => .
+
+            float amount;
+            return float.TryParse(strValue, NumberStyles.Currency, CultureInfo.InvariantCulture, out amount);  // invariant culture uses "."
+        }
+
+
         public static float ConvertCentsToCurrency(int _Cents)
         {
             return _Cents / 100.0f;

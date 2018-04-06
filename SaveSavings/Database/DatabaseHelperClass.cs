@@ -69,98 +69,6 @@ namespace SaveSavings
             }
         }
 
-        // Retrieve the specific contact from the database.     
-        //public Spends ReadContact(int contactid)
-        //{
-        //    using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
-        //    {
-        //        var existingconact = conn.Query<Spends>("select * from Contacts where Id =" + contactid).FirstOrDefault();
-        //        return existingconact;
-        //    }
-        //}
-
-
-
-
-        public List<ExpenseItem> GetAllExpenses()
-        {
-            try
-            {
-                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
-                {
-                    List<ExpenseItem> myCollection = conn.Table<ExpenseItem>().ToList<ExpenseItem>();
-
-                    foreach(ExpenseItem s in myCollection)
-                    {
-                        s.Date = s.Date.ToLocalTime().Date;
-                    }
-
-
-                    var tt = (from r in myCollection
-                                       group r by r.Date into g
-                                       select new ExpenseItem { Id = 0, Date = g.Key, Amount = g.Sum((t) => (t.Amount)) }
-                              );
-
-                    return tt.ToList<ExpenseItem>();
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-
-
-
-        public TotalStatistics GetTotalStatistics()
-        {
-            TotalStatistics stats = new TotalStatistics();
-
-            try
-            {
-                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
-                {
-                    // total spent
-                    stats.m_TotalExpenses = conn.Table<ExpenseItem>().Sum( v => v.Amount);
-                }
-            }
-            catch
-            {
-            }
-
-            return stats;
-        }
-
-
-
-        internal List<ExpenseItem> GetAmountsForDate(DateTime date)
-        {
-            // extract records for 'date'
-//            try
-            {
-                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
-                {
-                    DateTime dateOnlyFrom = date.Date;
-                    DateTime dateOnlyTo = date.AddDays(1).Date;
-
-//                    Expression<Func<Spends, bool>> myExpression = ;
-
-                    List<ExpenseItem> myCollection = conn.Table<ExpenseItem>().Where( (v) => ( (v.Date >= dateOnlyFrom) && (v.Date < dateOnlyTo) ) ).ToList<ExpenseItem>();
-
-                    foreach (ExpenseItem s in myCollection)
-                    {
-                        s.Date = s.Date.ToLocalTime().Date;
-                    }
-
-                    return myCollection;
-                }
-            }
-            //catch
-            //{
-            //    return null;
-            //}
-        }
 
 
 
@@ -169,9 +77,8 @@ namespace SaveSavings
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
-
-                var existingconact = conn.Query<ExpenseItem>("select * from Spends where Id =" + ObjContact.Id).FirstOrDefault();
-                if (existingconact != null)
+                //var existingconact = conn.Query<ExpenseItem>("select * from ExpenseItem where Id =" + ObjContact.Id).FirstOrDefault();
+                //if (existingconact != null)
                 {
 
                     conn.RunInTransaction(() =>
@@ -203,7 +110,7 @@ namespace SaveSavings
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
 
-                var existingconact = conn.Query<ExpenseItem>("select * from Spends where Id =" + Id).FirstOrDefault();
+                var existingconact = conn.Query<ExpenseItem>("select * from ExpenseItem where Id =" + Id).FirstOrDefault();
                 if (existingconact != null)
                 {
                     conn.RunInTransaction(() =>
@@ -216,10 +123,100 @@ namespace SaveSavings
 
 
 
-        public RegularsVM GetRegulars()
+
+        public List<ExpenseItem> GetAllExpenses()
         {
-            return new RegularsVM();
+            try
+            {
+                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+                {
+                    List<ExpenseItem> myCollection = conn.Table<ExpenseItem>().ToList<ExpenseItem>();
+
+                    foreach (ExpenseItem s in myCollection)
+                    {
+                        s.Date = s.Date.ToLocalTime().Date;
+                    }
+
+
+                    var tt = (from r in myCollection
+                              group r by r.Date into g
+                              select new ExpenseItem { Id = 0, Date = g.Key, Amount = g.Sum((t) => (t.Amount)) }
+                              );
+
+                    return tt.ToList<ExpenseItem>();
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
+
+
+
+
+        public TotalStatistics GetTotalStatistics()
+        {
+            TotalStatistics stats = new TotalStatistics();
+
+            try
+            {
+                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+                {
+                    // total spent
+                    stats.m_TotalExpenses = conn.Table<ExpenseItem>().Sum(v => v.Amount);
+                }
+            }
+            catch
+            {
+            }
+
+            return stats;
+        }
+
+
+
+        internal List<ExpenseItem> GetAmountsForDate(DateTime date)
+        {
+            // extract records for 'date'
+            //            try
+            {
+                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+                {
+                    DateTime dateOnlyFrom = date.Date;
+                    DateTime dateOnlyTo = date.AddDays(1).Date;
+
+                    //                    Expression<Func<Spends, bool>> myExpression = ;
+
+                    List<ExpenseItem> myCollection = conn.Table<ExpenseItem>().Where((v) => ((v.Date >= dateOnlyFrom) && (v.Date < dateOnlyTo))).ToList<ExpenseItem>();
+
+                    foreach (ExpenseItem s in myCollection)
+                    {
+                        s.Date = s.Date.ToLocalTime().Date;
+                    }
+
+                    return myCollection;
+                }
+            }
+            //catch
+            //{
+            //    return null;
+            //}
+        }
+
+
+
+
+        // Retrieve the specific contact from the database.     
+        //public Spends ReadContact(int contactid)
+        //{
+        //    using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+        //    {
+        //        var existingconact = conn.Query<Spends>("select * from Contacts where Id =" + contactid).FirstOrDefault();
+        //        return existingconact;
+        //    }
+        //}
+
 
     }
 }

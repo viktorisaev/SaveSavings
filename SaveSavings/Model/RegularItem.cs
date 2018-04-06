@@ -33,8 +33,9 @@
         }
 
 
-        public RegularItem(string _Name, REGULARS_PERIOD _Period, int _Amount)
+        public RegularItem(int _Id, string _Name, REGULARS_PERIOD _Period, int _Amount)
         {
+            this.Id = _Id;
             this.Name = _Name;
             this.Period = _Period;
             this.Amount = _Amount;

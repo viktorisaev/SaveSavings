@@ -17,6 +17,16 @@
         <vm:EditRegularItemVM x:Key="EditRegularItemDataSource" d:IsDataSource="True"/>
     </Page.Resources>
 
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <DrillInNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+
     <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -31,19 +41,20 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,0,12,0">
             <StackPanel>
-                <TextBox Text="{Binding RegularItem.Name}" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" PlaceholderText="Please put name here"/>
-                <TextBox Text="{Binding RegularItem.Amount}" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" PlaceholderText="Please put amount here"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Amount" InputScope="Text" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" PlaceholderText="Please put name here" />
+                <TextBox Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" PlaceholderText="Please put amount here"/>
                 <Grid Margin="10" HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <RadioButton Grid.Column="0" Content="Per Day" HorizontalAlignment="Center" IsChecked="{Binding RegularItem.PerPeriodIndex, ConverterParameter=0, Converter={StaticResource RadioButtonConverter}, Mode=OneWay}"/>
-                    <RadioButton Grid.Column="1" Content="Per Month" HorizontalAlignment="Center" IsChecked="{Binding RegularItem.PerPeriodIndex, ConverterParameter=1, Converter={StaticResource RadioButtonConverter}, Mode=OneWay}"/>
-                    <RadioButton Grid.Column="2" Content="Per Year" HorizontalAlignment="Center" IsChecked="{Binding RegularItem.PerPeriodIndex, ConverterParameter=2, Converter={StaticResource RadioButtonConverter}, Mode=OneWay}"/>
+                    <RadioButton Grid.Column="0" x:Name="w_PerDay" Content="Per Day" FontSize="{ThemeResource ToolTipContentThemeFontSize}" IsChecked="{Binding IsPerDay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" GroupName="PerPeriod" />
+                    <RadioButton Grid.Column="1" x:Name="w_PerMonth" Content="Per Month" FontSize="{ThemeResource ToolTipContentThemeFontSize}" IsChecked="{Binding IsPerMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" GroupName="PerPeriod" />
+                    <RadioButton Grid.Column="2" x:Name="w_PerYear" Content="Per Year" FontSize="{ThemeResource ToolTipContentThemeFontSize}" IsChecked="{Binding IsPerYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" GroupName="PerPeriod" />
                 </Grid>
                 <Button Content="{Binding EditButtonText}" Background="{Binding HeaderColor}" Margin="20,40,20,20" Padding="20" Foreground="White" HorizontalAlignment="Stretch" Command="{Binding EditCommand}" />
+                <Button Content="Delete" HorizontalAlignment="Stretch" Margin="20" Command="{Binding DeleteCommand}"/>
             </StackPanel>
         </Grid>
     </Grid>

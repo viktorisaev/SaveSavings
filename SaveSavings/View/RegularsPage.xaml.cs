@@ -80,18 +80,39 @@ namespace SaveSavings.View
 
         private void AddIncome_Clicked(object sender, RoutedEventArgs e)
         {
-            GotoEditRegularPage(true, true, new RegularItemVM("", 0, REGULARS_PERIOD.DAYLY));
+            GotoEditRegularPage(true, true, RegularItemVM.NEW_REGULAR_ITEM_ID);
         }
 
         private void AddExpense_Clicked(object sender, RoutedEventArgs e)
         {
-            GotoEditRegularPage(false, true, new RegularItemVM("", 0, REGULARS_PERIOD.YEARLY));
+            GotoEditRegularPage(false, true, RegularItemVM.NEW_REGULAR_ITEM_ID);
         }
 
-        private void GotoEditRegularPage(bool _IsIncome, bool _IsAdd, RegularItemVM _RegularItemVM)
+
+        private void EditIncome_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (w_IncomesList.SelectedIndex != -1)
+            {
+                RegularItemVM riVM = w_IncomesList.SelectedItem as RegularItemVM;   //Get selected item from the list
+                GotoEditRegularPage(true, false, riVM.Id);
+            }
+        }
+
+
+        private void EditExpense_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (w_ExpensesList.SelectedIndex != -1)
+            {
+                RegularItemVM riVM = w_ExpensesList.SelectedItem as RegularItemVM;   //Get selected item from the list
+                GotoEditRegularPage(false, false, riVM.Id);
+            }
+        }
+
+
+        private void GotoEditRegularPage(bool _IsIncome, bool _IsAdd, int _RegularItemId)
         {
             // create VM
-            EditRegularItemVM editRegularItem = new EditRegularItemVM(_IsIncome, _IsAdd, _RegularItemVM);
+            EditRegularItemVM editRegularItem = new EditRegularItemVM(_IsIncome, _IsAdd, _RegularItemId);
 
             // jump to the EditRegular page
             this.Frame.Navigate(typeof(EditRegular), editRegularItem);

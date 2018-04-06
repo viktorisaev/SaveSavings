@@ -92,7 +92,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <ListView Grid.Row="0"  ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Incomes}" >
+                        <ListView Grid.Row="0" x:Name="w_IncomesList" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Incomes}" SelectionChanged="EditIncome_Clicked">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -104,7 +104,7 @@
                     </Grid>
 
                     <!--Special big button-->
-                    <Button Grid.Row="1" Visibility="{Binding ShowExpensesAddButton}" Content="Add Income" Margin="80" Foreground="White" Background="ForestGreen" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddIncome_Clicked" BorderBrush="{ThemeResource AppBarEllipsisButtonBackgroundDisabled}" />
+                    <Button Grid.Row="1" Visibility="{Binding ShowIncomesAddButton}" Content="Add Income" Margin="80" Foreground="White" Background="ForestGreen" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddIncome_Clicked" BorderBrush="{ThemeResource AppBarEllipsisButtonBackgroundDisabled}" />
                 </Grid>
             </Border>
 
@@ -134,7 +134,7 @@
                         </Grid.RowDefinitions>
 
                         <!--list-->
-                        <ListView Grid.Row="0" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Expenses}">
+                        <ListView Grid.Row="0" x:Name="w_ExpensesList" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Expenses}" SelectionChanged="EditExpense_Clicked">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -147,7 +147,7 @@
 
 
                     <!--Special big button-->
-                    <Button Grid.Row="1" Visibility="{Binding ShowExpensesAddButton}" Content="Add Income" Margin="80" Foreground="White" Background="DarkRed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddIncome_Clicked" BorderBrush="{ThemeResource AppBarEllipsisButtonBackgroundDisabled}" />
+                    <Button Grid.Row="1" Visibility="{Binding ShowExpensesAddButton}" Content="Add Expense" Margin="80" Foreground="White" Background="DarkRed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddExpense_Clicked" BorderBrush="{ThemeResource AppBarEllipsisButtonBackgroundDisabled}" />
 
                 </Grid>
             </Border>

@@ -24,16 +24,6 @@ namespace SaveSavings.View
 
             // set data (ad execute bindings)
             this.DataContext = editRegularItemVM;
-
-            // DO NOT NEED THIS - WE USE MVVM!!
-
-            //            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
-
-            //            CultureInfo myCI = CultureInfo.CurrentCulture;
-            //            w_DailyCurrentDate.Text = myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
-
-            // THIS IS PROPER CODE!!!
-            //            w_DailyCurrentDate.Text = string.Format("{0:D}", m_CurrentDate);
         }
 
     }

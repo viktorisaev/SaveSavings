@@ -99,6 +99,7 @@
     <Compile Include="Persistance\RegularStorage.cs" />
     <Compile Include="ViewModel\EditRegularItemVM.cs" />
     <Compile Include="ViewModel\ExpenseVM.cs" />
+    <Compile Include="ViewModel\RegularItemVM.cs" />
     <Compile Include="ViewModel\RegularsVM.cs" />
     <Compile Include="View\AddContact.xaml.cs">
       <DependentUpon>AddContact.xaml</DependentUpon>

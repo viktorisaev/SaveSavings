@@ -1,4 +1,4 @@
-﻿<ViewModel:RegularsVM 
+﻿<ViewModel:RegularsVM
     xmlns:ViewModel="using:SaveSavings.ViewModel"
     xmlns:xxx="using:Windows.UI.Xaml"
     >
