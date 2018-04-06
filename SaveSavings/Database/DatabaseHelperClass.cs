@@ -21,6 +21,9 @@ namespace SaveSavings
 
     class DatabaseHelperClass
     {
+
+
+
         //Create Tabble   
         public void CreateDatabase(string DB_PATH)
         {
@@ -28,12 +31,11 @@ namespace SaveSavings
             {
                 using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), DB_PATH))
                 {
-                    conn.CreateTable<Spends>();
+                    conn.CreateTable<ExpenseItem>();
+                    conn.CreateTable<RegularItem>();
                 }
             }
         }
-
-
 
         private async Task<bool> CheckFileExists(string fileName)
         {
@@ -48,8 +50,15 @@ namespace SaveSavings
             }
         }
 
+
+
+
+
+
+
+
         // Insert the new contact in the Contacts table.   
-        public void Insert(Spends objContact)
+        public void Insert(ExpenseItem objContact)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
@@ -73,15 +82,15 @@ namespace SaveSavings
 
 
 
-        public List<Spends> GetAllExpenses()
+        public List<ExpenseItem> GetAllExpenses()
         {
             try
             {
                 using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
                 {
-                    List<Spends> myCollection = conn.Table<Spends>().ToList<Spends>();
+                    List<ExpenseItem> myCollection = conn.Table<ExpenseItem>().ToList<ExpenseItem>();
 
-                    foreach(Spends s in myCollection)
+                    foreach(ExpenseItem s in myCollection)
                     {
                         s.Date = s.Date.ToLocalTime().Date;
                     }
@@ -89,10 +98,10 @@ namespace SaveSavings
 
                     var tt = (from r in myCollection
                                        group r by r.Date into g
-                                       select new Spends { Id = 0, Date = g.Key, Amount = g.Sum((t) => (t.Amount)) }
+                                       select new ExpenseItem { Id = 0, Date = g.Key, Amount = g.Sum((t) => (t.Amount)) }
                               );
 
-                    return tt.ToList<Spends>();
+                    return tt.ToList<ExpenseItem>();
                 }
             }
             catch
@@ -113,7 +122,7 @@ namespace SaveSavings
                 using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
                 {
                     // total spent
-                    stats.m_TotalExpenses = conn.Table<Spends>().Sum( v => v.Amount);
+                    stats.m_TotalExpenses = conn.Table<ExpenseItem>().Sum( v => v.Amount);
                 }
             }
             catch
@@ -125,7 +134,7 @@ namespace SaveSavings
 
 
 
-        internal List<Spends> GetAmountsForDate(DateTime date)
+        internal List<ExpenseItem> GetAmountsForDate(DateTime date)
         {
             // extract records for 'date'
 //            try
@@ -137,9 +146,9 @@ namespace SaveSavings
 
 //                    Expression<Func<Spends, bool>> myExpression = ;
 
-                    List<Spends> myCollection = conn.Table<Spends>().Where( (v) => ( (v.Date >= dateOnlyFrom) && (v.Date < dateOnlyTo) ) ).ToList<Spends>();
+                    List<ExpenseItem> myCollection = conn.Table<ExpenseItem>().Where( (v) => ( (v.Date >= dateOnlyFrom) && (v.Date < dateOnlyTo) ) ).ToList<ExpenseItem>();
 
-                    foreach (Spends s in myCollection)
+                    foreach (ExpenseItem s in myCollection)
                     {
                         s.Date = s.Date.ToLocalTime().Date;
                     }
@@ -156,12 +165,12 @@ namespace SaveSavings
 
 
         //Update existing conatct   
-        public void UpdateDetails(Spends ObjContact)
+        public void UpdateDetails(ExpenseItem ObjContact)
         {
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
 
-                var existingconact = conn.Query<Spends>("select * from Spends where Id =" + ObjContact.Id).FirstOrDefault();
+                var existingconact = conn.Query<ExpenseItem>("select * from Spends where Id =" + ObjContact.Id).FirstOrDefault();
                 if (existingconact != null)
                 {
 
@@ -180,8 +189,8 @@ namespace SaveSavings
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
 
-                conn.DropTable<Spends>();
-                conn.CreateTable<Spends>();
+                conn.DropTable<ExpenseItem>();
+                conn.CreateTable<ExpenseItem>();
                 conn.Dispose();
                 conn.Close();
 
@@ -194,7 +203,7 @@ namespace SaveSavings
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
 
-                var existingconact = conn.Query<Spends>("select * from Spends where Id =" + Id).FirstOrDefault();
+                var existingconact = conn.Query<ExpenseItem>("select * from Spends where Id =" + Id).FirstOrDefault();
                 if (existingconact != null)
                 {
                     conn.RunInTransaction(() =>

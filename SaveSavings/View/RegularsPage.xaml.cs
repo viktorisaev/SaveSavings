@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Navigation;
 
 using SaveSavings.ViewModel;
 using Windows.UI.Core;
+using SaveSavings.Persistance;
+using SaveSavings.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,22 +38,11 @@ namespace SaveSavings.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // save current date passed at navigation
-//            m_CurrentDate = (DateTime)e.Parameter;
-
-            DataFromStorage dbcontacts = new DataFromStorage();
+            RegularStorage dbcontacts = new RegularStorage();
             RegularsVM regularsVM = dbcontacts.GetRegulars();   //Get regulars
 
             // set data (ad execute bindings)
             this.DataContext = regularsVM;
-
-//            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
-
-            //            CultureInfo myCI = CultureInfo.CurrentCulture;
-            //            w_DailyCurrentDate.Text = myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
-
-            // THIS IS PROPER CODE!!!
-//            w_DailyCurrentDate.Text = string.Format("{0:D}", m_CurrentDate);
         }
 
 
@@ -89,12 +80,12 @@ namespace SaveSavings.View
 
         private void AddIncome_Clicked(object sender, RoutedEventArgs e)
         {
-            GotoEditRegularPage(true, true, new RegularItemVM("ARD soft pillow", 1265, true));
+            GotoEditRegularPage(true, true, new RegularItemVM("", 0, REGULARS_PERIOD.DAYLY));
         }
 
         private void AddExpense_Clicked(object sender, RoutedEventArgs e)
         {
-            GotoEditRegularPage(false, true, new RegularItemVM("massage locion", 762, false));
+            GotoEditRegularPage(false, true, new RegularItemVM("", 0, REGULARS_PERIOD.YEARLY));
         }
 
         private void GotoEditRegularPage(bool _IsIncome, bool _IsAdd, RegularItemVM _RegularItemVM)

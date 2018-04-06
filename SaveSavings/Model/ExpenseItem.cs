@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaveSavings.Model
 {
-    public class Spends
+    public class ExpenseItem
     {
+
+        // Table data (columns of SQL table)
+
         //The Id property is marked as the Primary Key  
         [SQLite.Net.Attributes.PrimaryKey, SQLite.Net.Attributes.AutoIncrement]
         public int Id { get; set; }
@@ -16,13 +16,13 @@ namespace SaveSavings.Model
         public int Amount { get; set; }
 
 
-        public Spends()
+        public ExpenseItem()
         {
             //empty constructor  
         }
 
 
-        public Spends(int _Id, DateTime _Date, int _Amount)
+        public ExpenseItem(int _Id, DateTime _Date, int _Amount)
         {
             this.Id = _Id;
             this.Date = _Date;

@@ -46,7 +46,6 @@
     </Page.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <!--TitlePanel contains the name of the application and page title-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <!-- split 50/50 vertically -->
@@ -54,13 +53,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,0,5,10">
-            <TextBlock Text="Regulars:" Style="{ThemeResource TitleTextBlockStyle}" Margin="5,0,20,0"/>
-            <TextBlock Text="{Binding TotalDailyIncome, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource TitleTextBlockStyle}"/>
-            <TextBlock Text="per day" Style="{ThemeResource TitleTextBlockStyle}" Margin="5,0,0,0"/>
+
+        <!--Top header with total-->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,0,5,10" HorizontalAlignment="Right">
+            <TextBlock Text="You earn:" Style="{ThemeResource TitleTextBlockStyle}" Margin="5,0,20,0"/>
+            <TextBlock Text="{Binding TotalDailyIncome, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource TitleTextBlockStyle}" Foreground="Green"/>
+            <TextBlock Text="per day" Style="{ThemeResource TitleTextBlockStyle}" Margin="5,0,0,0" Foreground="Green"/>
         </StackPanel>
 
-        <Grid Grid.Row="1"   Margin="10,0,10,0">
+        <Grid Grid.Row="1"   Margin="5,0,5,0">
             <Grid.RowDefinitions>
                 <!-- split 50/50 vertically -->
                 <RowDefinition Height="*"/>
@@ -68,13 +69,13 @@
             </Grid.RowDefinitions>
 
 
+            <!--Incomes-->
             <Border Grid.Row="0" BorderBrush="ForestGreen" BorderThickness="2" Margin="0,0,0,5">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <!-- header + list + button -->
+                        <!-- header + container -->
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                    <StackPanel Grid.Row="0" Orientation="Horizontal" Background="ForestGreen">
@@ -82,47 +83,71 @@
                         <TextBlock Text="{Binding TotalIncome, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource IncomesTextBlockStyle}"/>
                     </StackPanel>
 
-                    <!--list-->
-                    <ListView Grid.Row="1" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Incomes}">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                    <!--list with button-->
 
-                    <Button Grid.Row="2" Content="Add Income" HorizontalAlignment="Stretch" Padding="10" Click="AddIncome_Clicked" />
+                    <Grid Grid.Row="1" Visibility="{Binding ShowIncomesList}">
+                        <Grid.RowDefinitions>
+                            <!-- list + button -->
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
+                        <ListView Grid.Row="0"  ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Incomes}" >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+
+                        <Button Grid.Row="1" Content="Add Income" HorizontalAlignment="Stretch" Padding="10" Click="AddIncome_Clicked" />
+                    </Grid>
+
+                    <!--Special big button-->
+                    <Button Grid.Row="1" Visibility="{Binding ShowExpensesAddButton}" Content="Add Income" Margin="80" Foreground="White" Background="ForestGreen" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddIncome_Clicked" BorderBrush="{ThemeResource AppBarEllipsisButtonBackgroundDisabled}" />
                 </Grid>
             </Border>
 
 
+            <!--Expenses-->
             <Border Grid.Row="1" BorderBrush="DarkRed" BorderThickness="2" Margin="0,0,0,5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <!-- header + list + button -->
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     
                     
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Background="DarkRed" >
-                        <TextBlock Text="Spends:" Style="{ThemeResource SpendsTextBlockStyle}"  Margin="10,0,20,0" />
-                        <TextBlock Text="{Binding TotalSpends, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SpendsTextBlockStyle}"/>
+                        <TextBlock Text="Expenses:" Style="{ThemeResource SpendsTextBlockStyle}"  Margin="10,0,20,0" />
+                        <TextBlock Text="{Binding TotalExpense, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SpendsTextBlockStyle}"/>
                     </StackPanel>
 
-                    <!--list-->
-                    <ListView Grid.Row="1" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Spends}">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
 
-                    <Button Grid.Row="2" Content="Add Spend" HorizontalAlignment="Stretch" Padding="10" Click="AddExpense_Clicked" />
+                    <Grid Grid.Row="1" Visibility="{Binding ShowExpensesList}">
+                        <Grid.RowDefinitions>
+                            <!-- list + button -->
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!--list-->
+                        <ListView Grid.Row="0" ItemContainerTransitions="{x:Null}" ItemTemplate="{StaticResource ListVisualTemplate}" ItemsSource="{Binding Expenses}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+
+                        <Button Grid.Row="1" Content="Add Spend" HorizontalAlignment="Stretch" Padding="10" Click="AddExpense_Clicked" />
+                    </Grid>
+
+
+                    <!--Special big button-->
+                    <Button Grid.Row="1" Visibility="{Binding ShowExpensesAddButton}" Content="Add Income" Margin="80" Foreground="White" Background="DarkRed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="AddIncome_Clicked" BorderBrush="{ThemeResource AppBarEllipsisButtonBackgroundDisabled}" />
 
                 </Grid>
             </Border>

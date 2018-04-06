@@ -27,7 +27,7 @@ namespace SaveSavings
         public static NavigationService NavigationService;
 
 
-        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "ContactsManager2.sqlite"));//DataBase Name 
+        public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "ContactsManager3.sqlite"));//DataBase Name 
 
 
 

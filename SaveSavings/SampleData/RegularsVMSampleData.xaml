@@ -1,10 +1,37 @@
-﻿<ViewModel:RegularsVM xmlns:ViewModel="using:SaveSavings.ViewModel">
+﻿<ViewModel:RegularsVM 
+    xmlns:ViewModel="using:SaveSavings.ViewModel"
+    xmlns:xxx="using:Windows.UI.Xaml"
+    >
 
     <ViewModel:RegularsVM.TotalDailyIncome>4575</ViewModel:RegularsVM.TotalDailyIncome>
 
     <ViewModel:RegularsVM.TotalIncome>2878</ViewModel:RegularsVM.TotalIncome>
 
-    <ViewModel:RegularsVM.TotalSpends>1578</ViewModel:RegularsVM.TotalSpends>
+    <ViewModel:RegularsVM.TotalExpense>1578</ViewModel:RegularsVM.TotalExpense>
+
+    <ViewModel:RegularsVM.ShowIncomesList>
+        <xxx:Visibility>
+            Collapsed
+        </xxx:Visibility>
+    </ViewModel:RegularsVM.ShowIncomesList>
+    
+    <ViewModel:RegularsVM.ShowExpensesList>
+        <xxx:Visibility>
+            Collapsed
+        </xxx:Visibility>
+    </ViewModel:RegularsVM.ShowExpensesList>
+    
+    <ViewModel:RegularsVM.ShowIncomesAddButton>
+        <xxx:Visibility>
+            Visible
+        </xxx:Visibility>
+    </ViewModel:RegularsVM.ShowIncomesAddButton>
+
+    <ViewModel:RegularsVM.ShowExpensesAddButton>
+        <xxx:Visibility>
+            Visible
+        </xxx:Visibility>
+    </ViewModel:RegularsVM.ShowExpensesAddButton>
 
     <ViewModel:RegularsVM.Incomes>
 
@@ -21,7 +48,7 @@
     </ViewModel:RegularsVM.Incomes>
 
 
-    <ViewModel:RegularsVM.Spends>
+    <ViewModel:RegularsVM.Expenses>
 
         <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="355" Name="Class aliquam aenean" PerPeriod="per year"/>
         <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="653" Name="Class aliquam aenean" PerPeriod="per year"/>
@@ -33,7 +60,7 @@
         <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="455" Name="Class aliquam aenean"/>
         <ViewModel:RegularItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" Amount="537" Name="Class aliquam aenean"/>
 
-    </ViewModel:RegularsVM.Spends>
+    </ViewModel:RegularsVM.Expenses>
 
 
 </ViewModel:RegularsVM>

@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Navigation;
 
 using SaveSavings.Model;
 using SaveSavings.ViewModel;
+using SaveSavings.Converters;
+using SaveSavings.Persistance;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -43,12 +45,12 @@ namespace SaveSavings.View
 
         private void ReadContactList_Loaded(object sender, RoutedEventArgs e)
         {
-            DataFromStorage dbcontacts = new DataFromStorage();
+            ExpensesStorage dbcontacts = new ExpensesStorage();
             DB_ContactList = dbcontacts.GetAllExpenses();//Get all DB expenses
 
             TotalStatistics stats = new DatabaseHelperClass().GetTotalStatistics();
 
-            w_TotalExpenses.Text = string.Format("{0:C}", stats.m_TotalExpenses / 100.0f);
+            w_TotalExpenses.Text = string.Format("{0:C}", DataConversion.ConvertCentsToCurrency(stats.m_TotalExpenses));
 
             // set list data - recent dates first
             listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();

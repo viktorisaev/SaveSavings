@@ -53,7 +53,7 @@ namespace SaveSavings.View
             int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
 
             // store data
-            Spends spend = new Spends(m_CurrentExpense.Id, m_CurrentExpense.Date, valCents);
+            ExpenseItem spend = new ExpenseItem(m_CurrentExpense.Id, m_CurrentExpense.Date, valCents);
             Db_Helper.UpdateDetails(spend);//Update selected DB contact Id
 
             // interface transition

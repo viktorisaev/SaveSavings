@@ -17,6 +17,14 @@ namespace SaveSavings.Converters
 
             return valCents;
         }
+
+
+        public static float ConvertCentsToCurrency(int _Cents)
+        {
+            return _Cents / 100.0f;
+        }
+
+
     }
 
 

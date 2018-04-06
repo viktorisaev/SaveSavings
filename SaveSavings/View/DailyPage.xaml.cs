@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 
 using SaveSavings.Model;
 using SaveSavings.ViewModel;
+using SaveSavings.Persistance;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,7 +39,7 @@ namespace SaveSavings.View
             // save current date passed at navigation
             m_CurrentDate = (DateTime)e.Parameter;
 
-            DataFromStorage dbcontacts = new DataFromStorage();
+            ExpensesStorage dbcontacts = new ExpensesStorage();
             DB_ContactList = dbcontacts.GetDateContacts(m_CurrentDate);//Get all DB contacts  
             //if (DB_ContactList.Count > 0)
             //{

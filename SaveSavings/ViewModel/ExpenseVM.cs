@@ -1,4 +1,5 @@
-﻿using SaveSavings.Model;
+﻿using SaveSavings.Converters;
+using SaveSavings.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,11 @@ namespace SaveSavings.ViewModel
         }
 
 
-        public ExpenseVM(Spends _Spends)
+        public ExpenseVM(ExpenseItem _Spends)
         {
             this.Id = _Spends.Id;
             this.Date = _Spends.Date;
-            this.Amount = _Spends.Amount / 100.0f;
+            this.Amount = DataConversion.ConvertCentsToCurrency( _Spends.Amount );
         }
 
         public DateTime GetDateOnly()
