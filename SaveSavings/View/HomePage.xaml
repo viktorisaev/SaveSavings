@@ -26,7 +26,7 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="12,0">
-                <TextBlock Text="Save every day:" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                <TextBlock Text="Save every day:" Style="{ThemeResource SubtitleTextBlockStyle}"/>
                 <TextBlock Text="{Binding AverageDailySave, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource HeaderTextBlockStyle}"/>
             </StackPanel>
             <Grid Margin="12,0">
@@ -66,7 +66,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" TextWrapping="Wrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
-                            <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
+                            <TextBlock Grid.Column="1" TextWrapping="Wrap" Foreground="{Binding AmountColor}" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

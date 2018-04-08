@@ -32,13 +32,13 @@ namespace SaveSavings.Persistance
 
         internal ObservableCollection<ExpenseVM> GetExpensesByDate(DateTime date)
         {
-            List<ExpenseItem> spends = Db_Helper.GetAmountsForDate(date);
+            List<ExpenseItem> expensesList = Db_Helper.GetAmountsForDate(date);
 
             ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
 
-            foreach(ExpenseItem spend in spends)
+            foreach(ExpenseItem expenseItem in expensesList)
             {
-                expenses.Add(new ExpenseVM(spend));
+                expenses.Add(new ExpenseVM(expenseItem.Id, expenseItem.Date, expenseItem.Amount));
             }
 
             return expenses;
