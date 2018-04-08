@@ -27,11 +27,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1">
-                <DatePicker x:Name="w_DateOfExpense" Header="Date" Margin="10"/>
-                <TextBox x:Name="w_AmountOfExpense" Header="Amount" InputScope="CurrencyAmount" Margin="10" />
+                <DatePicker x:Name="w_DateOfExpense" Header="Date" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
+                <TextBox x:Name="w_AmountOfExpense" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
             </StackPanel>
             <StackPanel Grid.Row="2">
-                <Button Content="Update" HorizontalAlignment="Stretch" Margin="20" Padding="20" Click="UpdateContact_Click"/>
+                <Button Content="Update Expense" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Margin="20" Padding="20" Click="UpdateContact_Click"/>
                 <Button Content="Delete" HorizontalAlignment="Stretch" Margin="20" Click="DeleteContact_Click"/>
             </StackPanel>
         </Grid>

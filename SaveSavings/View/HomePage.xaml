@@ -53,8 +53,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="OnAddExpense_Clicked"/>
-                    <Button Grid.Column="1" Content="See Regulars" HorizontalAlignment="Stretch" Margin="5" Click="OnSeeRegulars_Clicked"/>
+                <Button Grid.Column="0" Content="Add Expense" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Margin="5" Click="OnAddExpense_Clicked"/>
+                <Button Grid.Column="1" Content="See Regulars" HorizontalAlignment="Stretch" Margin="5" Click="OnSeeRegulars_Clicked"/>
             </Grid>
             
             <ListView Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected" ItemsSource="{Binding Expenses}">

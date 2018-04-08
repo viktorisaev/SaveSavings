@@ -139,7 +139,7 @@ namespace SaveSavings
 
 
                     var tt = (from r in myCollection
-                              orderby r.Date
+                              orderby r.Date descending
                               group r by r.Date into g
                               select new ExpenseItem { Id = 0, Date = g.Key, Amount = g.Sum((t) => (t.Amount)) }
                               );

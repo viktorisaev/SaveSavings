@@ -58,33 +58,21 @@ namespace SaveSavings.Persistance
 
             // 1) list
 
-            DateTime dateOnlyFrom = DateTime.Now;
-            bool isDateSet = false;
+            DateTime dateOnlyFrom = DateTime.Now.ToLocalTime().Date;    // latch first date. Local time?
 
             int averageIncomePerDay = App.GlobalPersistanceService.GetAverageIncomePerDay();    // should be alread there
 
             foreach (ExpenseItem expenseItem in listOfExpenses)
             {
-                if (!isDateSet)
-                {
-                    dateOnlyFrom = expenseItem.Date;    // latch first date
-                    isDateSet = true;
-                }
-
                 // skip to next day in DB
-                while (dateOnlyFrom < expenseItem.Date)
+                while (dateOnlyFrom > expenseItem.Date)
                 {
                     outputExpenses.AddExpense(new ExpenseVM(0, dateOnlyFrom, averageIncomePerDay));
-                    dateOnlyFrom = dateOnlyFrom.AddDays(1);
+                    dateOnlyFrom = dateOnlyFrom.AddDays(-1);
                 }
+                // eventually, store the current DB value
                 outputExpenses.AddExpense(new ExpenseVM(expenseItem.Id, expenseItem.Date, averageIncomePerDay - expenseItem.Amount));
-                dateOnlyFrom = dateOnlyFrom.AddDays(1);
-            }
-            // up to current date
-            while (dateOnlyFrom < DateTime.Now)     // TODO; local time?
-            {
-                outputExpenses.AddExpense(new ExpenseVM(0, dateOnlyFrom, averageIncomePerDay));
-                dateOnlyFrom = dateOnlyFrom.AddDays(1);
+                dateOnlyFrom = dateOnlyFrom.AddDays(-1);
             }
 
             // 2) average
@@ -106,36 +94,22 @@ namespace SaveSavings.Persistance
             ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
 
             // 1) list
-            DateTime dateOnlyFrom = DateTime.Now;
-            bool isDateSet = false;
+            DateTime dateOnlyFrom = DateTime.Now.ToLocalTime().Date;    // latch first date
 
             int sum = 0;
             int daysCount = 0;
 
             foreach (ExpenseItem expenseItem in listOfExpenses)
             {
-                if (!isDateSet)
-                {
-                    dateOnlyFrom = expenseItem.Date;    // latch first date
-                    isDateSet = true;
-                }
-
-                while (dateOnlyFrom < expenseItem.Date)
+                while (dateOnlyFrom > expenseItem.Date)
                 {
                     sum += 0;
                     daysCount += 1;
-                    dateOnlyFrom = dateOnlyFrom.AddDays(1);
+                    dateOnlyFrom = dateOnlyFrom.AddDays(-1);
                 }
                 sum += expenseItem.Amount;
                 daysCount += 1;
-                dateOnlyFrom = dateOnlyFrom.AddDays(1);
-            }
-            // up to current date
-            while (dateOnlyFrom < DateTime.Now)     // TODO; local time?
-            {
-                sum += 0;
-                daysCount += 1;
-                dateOnlyFrom = dateOnlyFrom.AddDays(1);
+                dateOnlyFrom = dateOnlyFrom.AddDays(-1);
             }
 
             // 2) average
