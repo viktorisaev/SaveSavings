@@ -6,9 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:SaveSavings.Converters"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    xmlns:vm="using:SaveSavings.ViewModel"
+    >
 
     <Page.Resources>
+        <vm:ExpensesVM x:Key="ExpensesVMDataSource" d:IsDataSource="True"/>
         <conv:CurrencyAmountConverter x:Name="CurrencyAmountConverter"/>
         <conv:DateConverter x:Name="DateConverter"/>
     </Page.Resources>
@@ -22,8 +25,20 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0">
-            <TextBlock Text="Expenses" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12,0"/>
-            <TextBlock x:Name="w_TotalExpenses" Text="999999" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12,0"/>
+            <StackPanel Orientation="Horizontal" Margin="12,0">
+                <TextBlock Text="Save every day:" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                <TextBlock Text="{Binding AverageDailySave, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource HeaderTextBlockStyle}"/>
+            </StackPanel>
+            <Grid Margin="12,0">
+                <!--top button(s)-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Foreground="Green" Text="{Binding AverageDailyIncome,  Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
+                <TextBlock Grid.Column="1" Foreground="Red" Text="{Binding AverageDailyExpense, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
+            </Grid>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -38,14 +53,11 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-
-                <StackPanel Grid.Column="0" >
-                    <Button Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="OnAddExpense_Clicked"/>
-                    <Button Content="See Regulars" HorizontalAlignment="Stretch" Margin="5" Click="OnSeeRegulars_Clicked"/>
-                </StackPanel>
+                    <Button Grid.Column="0" Content="Add Expense" HorizontalAlignment="Stretch" Margin="5" Click="OnAddExpense_Clicked"/>
+                    <Button Grid.Column="1" Content="See Regulars" HorizontalAlignment="Stretch" Margin="5" Click="OnSeeRegulars_Clicked"/>
             </Grid>
             
-            <ListView Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">
+            <ListView Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected" ItemsSource="{Binding Expenses}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

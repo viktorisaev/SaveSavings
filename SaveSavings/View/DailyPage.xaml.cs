@@ -40,7 +40,7 @@ namespace SaveSavings.View
             m_CurrentDate = (DateTime)e.Parameter;
 
             ExpensesStorage dbcontacts = new ExpensesStorage();
-            DB_ContactList = dbcontacts.GetDateContacts(m_CurrentDate);//Get all DB contacts  
+            DB_ContactList = dbcontacts.GetExpensesByDate(m_CurrentDate);//Get all DB contacts  
             //if (DB_ContactList.Count > 0)
             //{
             //    btnDelete.IsEnabled = true;

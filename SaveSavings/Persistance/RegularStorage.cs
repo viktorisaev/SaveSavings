@@ -10,6 +10,51 @@ namespace SaveSavings.Persistance   // this is MODEL, not ViewModel
     public class RegularStorage
     {
 
+        public int RegularIncomePerDay { get; set; }
+
+
+
+        public RegularStorage()
+        {
+
+            // calculate income per day
+            using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+            {
+                // 1) request SQL table data
+                // RegularItem = model
+                var regulars = conn.Table<RegularItem>().OrderBy(o => o.Amount);   // of type TableQuery<T>, BaseTableQuery, IEnumerable<T>, IEnumerable
+
+                // 2) process each record
+
+                float totalIncome = 0;
+                float totalExpense = 0;
+
+                RegularsVM regularsVM = new RegularsVM();
+                foreach (RegularItem r in regulars)
+                {
+                    int amount = r.Amount;
+                    if (amount > 0)
+                    {
+                        // positive = income
+                        RegularItemVM regularItemVM = new RegularItemVM(r.Id, r.Name, amount, r.Period);
+                        totalIncome += regularItemVM.GetDaily();
+
+                    }
+                    else
+                    {
+                        // negative = expense
+                        amount = -amount;   // use absolute value
+                        RegularItemVM regularItemVM = new RegularItemVM(r.Id, r.Name, amount, r.Period);
+                        totalExpense += regularItemVM.GetDaily();
+                    }
+                }
+
+                RegularIncomePerDay = (int)Math.Truncate(totalIncome * 100.0f) - (int)Math.Truncate(totalExpense * 100.0f);
+
+            }
+        }
+
+
         // create (generate, load, calculate) RegularsVM for the current global regular incomes/expenses
         public RegularsVM GetRegulars()
         {

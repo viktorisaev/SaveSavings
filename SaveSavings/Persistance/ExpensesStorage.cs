@@ -10,7 +10,18 @@ namespace SaveSavings.Persistance
 {
     public class ExpensesStorage
     {
-        DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
+
+        public ExpensesStorage()
+        {
+            int averageExpensePerDay = GetAverageExpensePerDay();
+
+            AverageExpense = averageExpensePerDay;
+        }
+
+
+        // publlic persistance data
+        // should be updated with any changes
+        public int AverageExpense { get; internal set; }
 
 
         //public ObservableCollection<Spends> GetAllContacts()
@@ -19,7 +30,7 @@ namespace SaveSavings.Persistance
         //}
 
 
-        internal ObservableCollection<ExpenseVM> GetDateContacts(DateTime date)
+        internal ObservableCollection<ExpenseVM> GetExpensesByDate(DateTime date)
         {
             List<ExpenseItem> spends = Db_Helper.GetAmountsForDate(date);
 
@@ -36,62 +47,93 @@ namespace SaveSavings.Persistance
 
 
 
-        internal ObservableCollection<ExpenseVM> GetAllExpenses()
+        // TODO: use stored cached data to create VM
+        internal ExpensesVM GetAllExpenses()
         {
-            List<ExpenseItem> spends = Db_Helper.GetAllExpenses();
+            ExpensesVM outputExpenses = new ExpensesVM();
+
+            var listOfExpenses = Db_Helper.GetAllExpenses();    // refactor: do not use temp List<>
 
             ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
 
-            foreach (ExpenseItem spend in spends)
+            // 1) list
+
+            DateTime dateOnlyFrom = DateTime.Now;
+            bool isDateSet = false;
+
+            int averageIncomePerDay = App.GlobalPersistanceService.GetAverageIncomePerDay();    // should be alread there
+
+            foreach (ExpenseItem expenseItem in listOfExpenses)
             {
-                expenses.Add(new ExpenseVM(spend));
+                if (!isDateSet)
+                {
+                    dateOnlyFrom = expenseItem.Date;    // latch first date
+                    isDateSet = true;
+                }
+
+                // skip to next day in DB
+                while (dateOnlyFrom < expenseItem.Date)
+                {
+                    outputExpenses.AddExpense(new ExpenseVM(0, dateOnlyFrom, averageIncomePerDay));
+                    dateOnlyFrom = dateOnlyFrom.AddDays(1);
+                }
+                outputExpenses.AddExpense(new ExpenseVM(expenseItem.Id, expenseItem.Date, averageIncomePerDay - expenseItem.Amount));
+                dateOnlyFrom = dateOnlyFrom.AddDays(1);
             }
 
-            return expenses;
+            // 2) average
+            outputExpenses.SetAverages(AverageExpense, averageIncomePerDay, averageIncomePerDay - AverageExpense);   // use stored value
 
+            // return built result
+            return outputExpenses;
         }
 
 
 
+        // TODO: optimize out by storing all session data and update it when something changed only
+        private int GetAverageExpensePerDay()
+        {
+            ExpensesVM outputExpenses = new ExpensesVM();
 
-        //string[] StubNames =
-        //{
-        //    "Зарплата",
-        //    "BahnCard",
-        //    "ARD",
-        //    "DJH Deutschland",
-        //    "Sicherung",
-        //    "Хлебушек"
-        //};
+            var listOfExpenses = Db_Helper.GetAllExpenses();    // refactor: do not use temp List<>
+
+            ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
+
+            // 1) list
+            DateTime dateOnlyFrom = DateTime.Now;
+            bool isDateSet = false;
+
+            int sum = 0;
+            int daysCount = 0;
+
+            foreach (ExpenseItem expenseItem in listOfExpenses)
+            {
+                if (!isDateSet)
+                {
+                    dateOnlyFrom = expenseItem.Date;    // latch first date
+                    isDateSet = true;
+                }
+
+                while (dateOnlyFrom < expenseItem.Date)
+                {
+                    sum += 0;
+                    daysCount += 1;
+                    dateOnlyFrom = dateOnlyFrom.AddDays(1);
+                }
+                sum += expenseItem.Amount;
+                daysCount += 1;
+                dateOnlyFrom = dateOnlyFrom.AddDays(1);
+            }
+
+            // 2) average
+            int avg = (int)Math.Truncate((float)sum / (float)daysCount);
+
+            return avg;
+        }
 
 
 
-        //internal RegularsVM GetRegulars()
-        //{
-        //    RegularsVM regularsVM = Db_Helper.GetRegulars();
-
-        //    // TODO: this is stub data
-        //    regularsVM.SetTotalIncomeAndExpense(6564, 2545);
-
-        //    Random rnd = new Random();
-
-        //    List<RegularItemVM> lst = new List<RegularItemVM>();
-        //    for (int i = 0, ei = rnd.Next(3,10); i < ei; ++i)
-        //    {
-        //        lst.Add(new RegularItemVM(StubNames[rnd.Next(0, StubNames.Length)], rnd.Next(20, 200000), rnd.Next(0, 2) == 0 ));
-        //    }
-        //    regularsVM.SetIncomes(lst);
-
-        //    lst = new List<RegularItemVM>();
-        //    for (int i = 0, ei = rnd.Next(3, 10); i < ei; ++i)
-        //    {
-        //        lst.Add(new RegularItemVM(StubNames[rnd.Next(0, StubNames.Length)], rnd.Next(20, 10000), rnd.Next(0, 2) == 0));
-        //    }
-        //    regularsVM.SetSpends(lst);
-
-
-        //    return regularsVM;
-        //}
+        DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
 
 
     }   // class DatabaseStorage

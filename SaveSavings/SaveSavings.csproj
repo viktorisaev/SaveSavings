@@ -96,8 +96,10 @@
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="Model\RegularItem.cs" />
     <Compile Include="Converters\DataConversion.cs" />
+    <Compile Include="Persistance\GlobalPersistenceService.cs" />
     <Compile Include="Persistance\RegularStorage.cs" />
     <Compile Include="ViewModel\EditRegularItemVM.cs" />
+    <Compile Include="ViewModel\ExpensesVM.cs" />
     <Compile Include="ViewModel\ExpenseVM.cs" />
     <Compile Include="ViewModel\RegularItemVM.cs" />
     <Compile Include="ViewModel\RegularsVM.cs" />

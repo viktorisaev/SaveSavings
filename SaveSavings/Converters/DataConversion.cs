@@ -6,6 +6,17 @@ namespace SaveSavings.Converters
 {
     class DataConversion
     {
+
+
+        public static int ConvertCurrencyToCents(float currencyValue)
+        {
+            int valCents = (int)Math.Round(currencyValue * 100.0f);
+
+            return valCents;
+        }
+
+
+
         public static int ConvertCurrencyStringToIntegerCents(string strValue)
         {
             // patch decimal separator
@@ -13,7 +24,7 @@ namespace SaveSavings.Converters
             strValue = strValue.Replace('-', '.'); // - => .
 
             float amount = float.Parse(strValue, NumberStyles.Currency, CultureInfo.InvariantCulture);  // invariant culture uses "."
-            int valCents = (int)Math.Round(amount * 100.0f);
+            int valCents = ConvertCurrencyToCents(amount);
 
             return valCents;
         }

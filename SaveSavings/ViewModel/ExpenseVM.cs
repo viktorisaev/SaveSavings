@@ -23,11 +23,19 @@ namespace SaveSavings.ViewModel
         }
 
 
-        public ExpenseVM(ExpenseItem _Spends)
+        public ExpenseVM(int _Id, DateTime _Date, int _Amount)
         {
-            this.Id = _Spends.Id;
-            this.Date = _Spends.Date;
-            this.Amount = DataConversion.ConvertCentsToCurrency( _Spends.Amount );
+            this.Id = _Id;
+            this.Date = _Date;
+            this.Amount = DataConversion.ConvertCentsToCurrency(_Amount);
+        }
+
+
+        public ExpenseVM(ExpenseItem _Expense)
+        {
+            this.Id = _Expense.Id;
+            this.Date = _Expense.Date;
+            this.Amount = DataConversion.ConvertCentsToCurrency( _Expense.Amount );
         }
 
         public DateTime GetDateOnly()

@@ -1,4 +1,5 @@
 ﻿using SaveSavings.Helpers;
+using SaveSavings.Persistance;
 using SQLite.Net;
 using System;
 using System.IO;
@@ -26,6 +27,9 @@ namespace SaveSavings
             // for navigation from ViewModel (say, with a DelegateCommand)
         public static NavigationService NavigationService;
 
+        // TODO: singleton??
+        public static GlobalPersistenceService GlobalPersistanceService;
+
 
         public static string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "ContactsManager3.sqlite"));//DataBase Name 
 
@@ -39,6 +43,9 @@ namespace SaveSavings
             // database
             DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
             Db_Helper.CreateDatabase(DB_PATH);
+
+            // global persistance
+            GlobalPersistanceService = new GlobalPersistenceService();
         }
 
 

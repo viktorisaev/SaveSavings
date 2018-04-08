@@ -29,7 +29,7 @@ namespace SaveSavings.View
     /// </summary>
     public sealed partial class HomePage : Page
     {
-        ObservableCollection<ExpenseVM> DB_ContactList = new ObservableCollection<ExpenseVM>();
+//        ObservableCollection<ExpenseVM> DB_ContactList = new ObservableCollection<ExpenseVM>();
 
 
 
@@ -46,14 +46,19 @@ namespace SaveSavings.View
         private void ReadContactList_Loaded(object sender, RoutedEventArgs e)
         {
             ExpensesStorage dbcontacts = new ExpensesStorage();
-            DB_ContactList = dbcontacts.GetAllExpenses();//Get all DB expenses
+            ExpensesVM expenses = dbcontacts.GetAllExpenses();//Get all DB expenses
 
-            TotalStatistics stats = new DatabaseHelperClass().GetTotalStatistics();
+            this.DataContext = expenses;
 
-            w_TotalExpenses.Text = string.Format("{0:C}", DataConversion.ConvertCentsToCurrency(stats.m_TotalExpenses));
+
+            // use Binding, not setters!!
+
+//            TotalStatistics stats = new DatabaseHelperClass().GetTotalStatistics();
+
+//            w_TotalExpenses.Text = string.Format("{0:C}", DataConversion.ConvertCentsToCurrency(stats.m_TotalExpenses));
 
             // set list data - recent dates first
-            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
+//            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
         }
 
 

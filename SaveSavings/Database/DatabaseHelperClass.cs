@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
+using SaveSavings.Converters;
 using SaveSavings.Model;
 using SaveSavings.ViewModel;
 
@@ -139,6 +139,7 @@ namespace SaveSavings
 
 
                     var tt = (from r in myCollection
+                              orderby r.Date
                               group r by r.Date into g
                               select new ExpenseItem { Id = 0, Date = g.Key, Amount = g.Sum((t) => (t.Amount)) }
                               );
@@ -149,6 +150,35 @@ namespace SaveSavings
             catch
             {
                 return null;
+            }
+        }
+
+
+
+
+        public int GetAverageExpense()
+        {
+            try
+            {
+                using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+                {
+                    var allExpenses = conn.Table<ExpenseItem>();
+
+                    var expenses = (from r in allExpenses
+                                    group r by r.Date into g
+                                    select new {Amount = g.Sum((t) => (t.Amount)) }
+                                    );
+
+                    float avgCurrency = (float)expenses.Average( o => o.Amount) / 100.0f;
+
+                    int avg = DataConversion.ConvertCurrencyToCents(avgCurrency);
+
+                    return avg;
+                }
+            }
+            catch
+            {
+                return 0;   // error!!
             }
         }
 
