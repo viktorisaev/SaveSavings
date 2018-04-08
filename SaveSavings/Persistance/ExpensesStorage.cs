@@ -80,6 +80,12 @@ namespace SaveSavings.Persistance
                 outputExpenses.AddExpense(new ExpenseVM(expenseItem.Id, expenseItem.Date, averageIncomePerDay - expenseItem.Amount));
                 dateOnlyFrom = dateOnlyFrom.AddDays(1);
             }
+            // up to current date
+            while (dateOnlyFrom < DateTime.Now)     // TODO; local time?
+            {
+                outputExpenses.AddExpense(new ExpenseVM(0, dateOnlyFrom, averageIncomePerDay));
+                dateOnlyFrom = dateOnlyFrom.AddDays(1);
+            }
 
             // 2) average
             outputExpenses.SetAverages(AverageExpense, averageIncomePerDay, averageIncomePerDay - AverageExpense);   // use stored value
@@ -121,6 +127,13 @@ namespace SaveSavings.Persistance
                     dateOnlyFrom = dateOnlyFrom.AddDays(1);
                 }
                 sum += expenseItem.Amount;
+                daysCount += 1;
+                dateOnlyFrom = dateOnlyFrom.AddDays(1);
+            }
+            // up to current date
+            while (dateOnlyFrom < DateTime.Now)     // TODO; local time?
+            {
+                sum += 0;
                 daysCount += 1;
                 dateOnlyFrom = dateOnlyFrom.AddDays(1);
             }
