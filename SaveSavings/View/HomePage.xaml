@@ -25,9 +25,9 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0">
-            <StackPanel Orientation="Horizontal" Margin="12,0">
-                <TextBlock Text="Save every day:" Style="{ThemeResource SubtitleTextBlockStyle}"/>
-                <TextBlock Text="{Binding AverageDailySave, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource HeaderTextBlockStyle}"/>
+            <StackPanel Orientation="Vertical" Margin="12,0">
+                <TextBlock Text="Save every day:" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding AverageDailySave, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
             </StackPanel>
             <Grid Margin="12,0">
                 <!--top button(s)-->
@@ -36,8 +36,14 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Foreground="Green" Text="{Binding AverageDailyIncome,  Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
-                <TextBlock Grid.Column="1" Foreground="Red" Text="{Binding AverageDailyExpense, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="Avg. income:" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,0,5,0"/>
+                    <TextBlock Foreground="Green" Text="{Binding AverageDailyIncome,  Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="Avg. expense:" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,0,5,0"/>
+                    <TextBlock Foreground="Red" Text="{Binding AverageDailyExpense, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
+                </StackPanel>
             </Grid>
         </StackPanel>
 
