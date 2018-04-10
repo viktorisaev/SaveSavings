@@ -121,7 +121,7 @@ namespace SaveSavings.Persistance
             // MOCK data
             for (int i = 0, ei = 10; i < ei; ++i)
             {
-                outputUniqueExpenses.AddExpense(new UniqueExpenseVM(0, DateTime.Now, 123 + i * 100, "Data " + i.ToString()));
+                outputUniqueExpenses.AddExpense(new UniqueExpenseVM(i+1, DateTime.Now, 123 + i * 100, "Data " + i.ToString()));
             }
 
 

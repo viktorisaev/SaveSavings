@@ -1,0 +1,20 @@
+﻿<ViewModel:EditUniqueItemVM xmlns:ViewModel="using:SaveSavings.ViewModel" xmlns:Helpers="using:SaveSavings.Helpers" EditButtonText="Cras nam" Name="Class sed" UniqueExpenseItemId="98">
+
+    <ViewModel:EditUniqueItemVM.Amount>
+        12.36
+    </ViewModel:EditUniqueItemVM.Amount>
+
+
+    <ViewModel:EditUniqueItemVM.Name>
+        Urlaub cost 2/4
+    </ViewModel:EditUniqueItemVM.Name>
+
+    <ViewModel:EditUniqueItemVM.ShowAddButton>
+        true
+    </ViewModel:EditUniqueItemVM.ShowAddButton>
+    
+    <ViewModel:EditUniqueItemVM.DeleteCommand>
+		<Helpers:DelegateCommand/>
+	</ViewModel:EditUniqueItemVM.DeleteCommand>
+    
+</ViewModel:EditUniqueItemVM>

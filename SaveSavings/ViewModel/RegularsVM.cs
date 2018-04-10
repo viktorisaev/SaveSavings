@@ -1,4 +1,5 @@
 ﻿using SaveSavings.Converters;
+using SaveSavings.Helpers;
 using SaveSavings.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,16 +29,11 @@ namespace SaveSavings.ViewModel
         public ObservableCollection<RegularItemVM> Expenses { get { return this.m_Expenses; } }
 
 
-        public Visibility ShowIncomesList { get { return GetVisibility(m_Incomes.Count > 0); } }
-        public Visibility ShowExpensesList { get { return GetVisibility(m_Expenses.Count > 0); } }
-        public Visibility ShowIncomesAddButton { get { return GetVisibility(m_Incomes.Count == 0); } }
-        public Visibility ShowExpensesAddButton { get { return GetVisibility(m_Expenses.Count == 0); } }
+        public Visibility ShowIncomesList { get { return ViewHelpers.GetVisibility(m_Incomes.Count > 0); } }
+        public Visibility ShowExpensesList { get { return ViewHelpers.GetVisibility(m_Expenses.Count > 0); } }
+        public Visibility ShowIncomesAddButton { get { return ViewHelpers.GetVisibility(m_Incomes.Count == 0); } }
+        public Visibility ShowExpensesAddButton { get { return ViewHelpers.GetVisibility(m_Expenses.Count == 0); } }
 
-
-        private Visibility GetVisibility(bool _IsVisible)
-        {
-            return _IsVisible ? Visibility.Visible : Visibility.Collapsed;
-        }
 
 
 

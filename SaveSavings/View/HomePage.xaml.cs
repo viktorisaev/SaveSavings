@@ -1,24 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using SaveSavings.Persistance;
+using SaveSavings.ViewModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-using SaveSavings.Model;
-using SaveSavings.ViewModel;
-using SaveSavings.Converters;
-using SaveSavings.Persistance;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -92,6 +76,36 @@ namespace SaveSavings.View
         private void OnSeeRegulars_Clicked(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(RegularsPage));
+        }
+
+
+    
+
+        private void OnAddUniqueExpense_Clicked(object sender, RoutedEventArgs e)
+        {
+            GotoEditUniqueExpensePage(true, EditUniqueItemVM.NEW_REGULAR_ITEM_ID);
+        }
+
+
+        private void OnUniqueExpense_Selected(object sender, RoutedEventArgs e)
+        {
+            if (w_UniqueExpensesList.SelectedIndex != -1)
+            {
+                UniqueExpenseVM uiVM = w_UniqueExpensesList.SelectedItem as UniqueExpenseVM;   //Get selected item from the list
+                GotoEditUniqueExpensePage(false, uiVM.Id);
+            }
+        }
+
+        
+
+
+        private void GotoEditUniqueExpensePage(bool _IsAdd, int _UniqueItemId)
+        {
+            // create VM
+            EditUniqueItemVM uniqueExpenseItem = new EditUniqueItemVM(_IsAdd, _UniqueItemId);
+
+            // jump to the EditRegular page
+            this.Frame.Navigate(typeof(EditUniqueExpense), uniqueExpenseItem);
         }
 
     }   // class HomePage

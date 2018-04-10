@@ -1,0 +1,51 @@
+﻿<ViewModel:EditUniqueItemVM xmlns:ViewModel="using:SaveSavings.ViewModel"
+                            xmlns:Helpers="using:SaveSavings.Helpers" 
+                                xmlns:xxx="using:Windows.UI.Xaml"
+                            UniqueExpenseItemId="-1">
+
+
+    <ViewModel:EditUniqueItemVM.Date>
+        3/31/2018
+    </ViewModel:EditUniqueItemVM.Date>
+    
+    <ViewModel:EditUniqueItemVM.Amount>
+        12.36
+    </ViewModel:EditUniqueItemVM.Amount>
+
+    <ViewModel:EditUniqueItemVM.Name>
+        Cras mauris phasellus vestibulum class
+    </ViewModel:EditUniqueItemVM.Name>
+
+    <ViewModel:EditUniqueItemVM.ShowAddButton>
+        <xxx:Visibility>
+            Visible
+            
+        </xxx:Visibility>
+    </ViewModel:EditUniqueItemVM.ShowAddButton>
+
+    <ViewModel:EditUniqueItemVM.ShowUpdateButton>
+        <xxx:Visibility>
+            Collapsed
+        </xxx:Visibility>
+    </ViewModel:EditUniqueItemVM.ShowUpdateButton>
+
+
+    <ViewModel:EditUniqueItemVM.UpdateButtonText>
+        Update Income
+    </ViewModel:EditUniqueItemVM.UpdateButtonText>
+
+    <ViewModel:EditUniqueItemVM.UpdateButtonColor>
+        ForestGreen
+    </ViewModel:EditUniqueItemVM.UpdateButtonColor>
+    
+
+    <ViewModel:EditUniqueItemVM.AddCommand>
+		<Helpers:DelegateCommand/>
+	</ViewModel:EditUniqueItemVM.AddCommand>
+	<ViewModel:EditUniqueItemVM.DeleteCommand>
+		<Helpers:DelegateCommand/>
+	</ViewModel:EditUniqueItemVM.DeleteCommand>
+	<ViewModel:EditUniqueItemVM.UpdateCommand>
+		<Helpers:DelegateCommand/>
+	</ViewModel:EditUniqueItemVM.UpdateCommand>
+</ViewModel:EditUniqueItemVM>

@@ -140,7 +140,7 @@
                             <Button Grid.Column="0" Grid.ColumnSpan="2" Content="Add Unique" HorizontalAlignment="Stretch" Margin="5" Click="OnAddUniqueExpense_Clicked"/>
                         </Grid>
 
-                        <ListView Grid.Row="1" x:Name="w_UniqueExpensesList" SelectionChanged="DateListItemSelected" ItemsSource="{Binding UniqueExpenses.ExpensesList}">
+                        <ListView Grid.Row="1" x:Name="w_UniqueExpensesList" SelectionChanged="OnUniqueExpense_Selected" ItemsSource="{Binding UniqueExpenses.ExpensesList}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>

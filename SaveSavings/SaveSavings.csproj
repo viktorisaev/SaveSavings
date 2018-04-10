@@ -94,12 +94,14 @@
   <ItemGroup>
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
+    <Compile Include="Helpers\ViewHelpers.cs" />
     <Compile Include="Model\RegularItem.cs" />
     <Compile Include="Converters\DataConversion.cs" />
     <Compile Include="Model\UniqueExpense.cs" />
     <Compile Include="Persistance\GlobalPersistenceService.cs" />
     <Compile Include="Persistance\RegularStorage.cs" />
     <Compile Include="ViewModel\AllExpensesVM.cs" />
+    <Compile Include="ViewModel\EditUniqueItemVM.cs" />
     <Compile Include="ViewModel\EditRegularItemVM.cs" />
     <Compile Include="ViewModel\UniqueExpensesVM.cs" />
     <Compile Include="ViewModel\ExpensesVM.cs" />
@@ -117,6 +119,9 @@
     <Compile Include="Database\DatabaseHelperClass.cs" />
     <Compile Include="View\DetailsPage.xaml.cs">
       <DependentUpon>DetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditUniqueExpense.xaml.cs">
+      <DependentUpon>EditUniqueExpense.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EditRegular.xaml.cs">
       <DependentUpon>EditRegular.xaml</DependentUpon>
@@ -162,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
+    <DesignData Include="SampleData\EditUniqueItemVMSampleData1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
     <Page Include="View\AddExpense.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +178,10 @@
     <Page Include="View\DetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditUniqueExpense.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\EditRegular.xaml">
       <SubType>Designer</SubType>

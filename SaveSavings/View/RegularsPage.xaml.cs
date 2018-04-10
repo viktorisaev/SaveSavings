@@ -117,5 +117,6 @@ namespace SaveSavings.View
             // jump to the EditRegular page
             this.Frame.Navigate(typeof(EditRegular), editRegularItem);
         }
+
     }
 }

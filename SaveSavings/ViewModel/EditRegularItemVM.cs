@@ -150,7 +150,7 @@ namespace SaveSavings.ViewModel
                             BackSpaceInvoked();
 
                         },
-                        p => (true)
+                        p => (RegularItemId != RegularItemVM.NEW_REGULAR_ITEM_ID)
                     );
                 }
                 return deleteCommand;
