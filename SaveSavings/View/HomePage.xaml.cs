@@ -48,7 +48,15 @@ namespace SaveSavings.View
             ExpensesStorage dbcontacts = new ExpensesStorage();
             ExpensesVM expenses = dbcontacts.GetAllExpenses();//Get all DB expenses
 
-            this.DataContext = expenses;
+            // everyday expenses
+            AllExpensesVM allExpenses = new AllExpensesVM();
+            allExpenses.Expenses = expenses;
+
+            // unique expenses
+            UniqueExpensesVM uniqueExpenses = dbcontacts.GetAllUniqueExpenses();
+            allExpenses.UniqueExpenses = uniqueExpenses;
+
+            this.DataContext = allExpenses;
 
 
             // use Binding, not setters!!

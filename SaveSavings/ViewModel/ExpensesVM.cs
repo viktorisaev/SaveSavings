@@ -14,7 +14,7 @@ namespace SaveSavings.ViewModel
         public float AverageDailyIncome { get { return DataConversion.ConvertCentsToCurrency(m_AverageIncomePerDay); } }    // positive :) Could be negative, but then the app doesn't make any sense
         public float AverageDailyExpense { get { return DataConversion.ConvertCentsToCurrency(m_AverageExpensePerDay); } }    // positive :) Could be negative, but then the app doesn't make any sense
 
-        public ObservableCollection<ExpenseVM> Expenses { get { return this.m_Expenses; } }
+        public ObservableCollection<ExpenseVM> ExpensesList { get { return this.m_ExpensesList; } }
 
 
         public void SetAverages(int _expense, int _income, int _save)
@@ -26,12 +26,12 @@ namespace SaveSavings.ViewModel
 
         public void AddExpense(ExpenseVM _Expense)
         {
-                m_Expenses.Add(_Expense);
+                m_ExpensesList.Add(_Expense);
         }
 
 
         // shadow data fields
-        private ObservableCollection<ExpenseVM> m_Expenses = new ObservableCollection<ExpenseVM>();
+        private ObservableCollection<ExpenseVM> m_ExpensesList = new ObservableCollection<ExpenseVM>();
 
         private int m_AverageExpensePerDay;    // keep it int to do proper calculations
         private int m_AverageIncomePerDay;    // keep it int to do proper calculations

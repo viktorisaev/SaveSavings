@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using SaveSavings.Converters;
+﻿using SaveSavings.Converters;
 using SaveSavings.Model;
-using SaveSavings.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SaveSavings
 {
@@ -33,6 +30,7 @@ namespace SaveSavings
                 {
                     conn.CreateTable<ExpenseItem>();
                     conn.CreateTable<RegularItem>();
+                    conn.CreateTable<UniqueExpenseItem>();
                 }
             }
         }
