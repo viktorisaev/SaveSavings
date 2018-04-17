@@ -24,12 +24,6 @@ namespace SaveSavings.Persistance
         public int AverageExpense { get; internal set; }
 
 
-        //public ObservableCollection<Spends> GetAllContacts()
-        //{
-        //    return Db_Helper.ReadAllContacts();
-        //}
-
-
         internal ObservableCollection<ExpenseVM> GetExpensesByDate(DateTime date)
         {
             List<ExpenseItem> expensesList = Db_Helper.GetAmountsForDate(date);
@@ -42,7 +36,6 @@ namespace SaveSavings.Persistance
             }
 
             return expenses;
-
         }
 
 
@@ -57,7 +50,6 @@ namespace SaveSavings.Persistance
             ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
 
             // 1) list
-
             DateTime dateOnlyFrom = DateTime.Now.ToLocalTime().Date;    // latch first date. Local time?
 
             int averageIncomePerDay = App.GlobalPersistanceService.GetAverageIncomePerDay();    // should be alread there
@@ -81,8 +73,6 @@ namespace SaveSavings.Persistance
             // return built result
             return outputExpenses;
         }
-
-
 
 
 

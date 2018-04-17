@@ -1,10 +1,11 @@
 ﻿using SaveSavings.Persistance;
 using SaveSavings.ViewModel;
+using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+
 
 namespace SaveSavings.View
 {
@@ -37,9 +38,19 @@ namespace SaveSavings.View
             allExpenses.Expenses = expenses;
 
             // unique expenses
-            UniqueExpensesStorage db = new UniqueExpensesStorage();
+            UniqueExpensesStorage db = App.GlobalPersistanceService.GetUniqueExpensesStorage();
             UniqueExpensesVM uniqueExpenses = db.GetAllUniqueExpenses();
             allExpenses.UniqueExpenses = uniqueExpenses;
+
+            // overall
+            // TODO: use DB
+            //UniqueExpensesStorage db = new UniqueExpensesStorage();
+            //OverallVM overall = db.GetAllUniqueExpenses();
+
+            OverallVM overall = new OverallVM(new DateTime(2018, 03, 25), DateTime.Now, new DateTime(2018, 06, 22), App.GlobalPersistanceService.GetAverageSavingsPerDay(), 
+                new DateTime(2018, 03, 29), 7855);
+            allExpenses.Overall = overall;
+            
 
             this.DataContext = allExpenses;
 

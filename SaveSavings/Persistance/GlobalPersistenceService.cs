@@ -17,6 +17,13 @@ namespace SaveSavings.Persistance
         {
             m_RegularStorage = new RegularStorage();    // should be initialized first because of average income data is used in expenses
             m_ExpensesStorage = new ExpensesStorage();
+            m_UniqueExpensesStorage = new UniqueExpensesStorage(new DateTime(2018, 03, 29));
+        }
+
+
+        public UniqueExpensesStorage GetUniqueExpensesStorage()
+        {
+            return m_UniqueExpensesStorage;
         }
 
 
@@ -25,9 +32,23 @@ namespace SaveSavings.Persistance
             return m_RegularStorage.RegularIncomePerDay;
         }
 
-        RegularStorage m_RegularStorage;
-        ExpensesStorage m_ExpensesStorage;
+        public int GetAverageSavingsPerDay()
+        {
+            return GetAverageIncomePerDay() - m_ExpensesStorage.AverageExpense;
+        }
 
+
+        public int GetTotalUniqueAmount()
+        {
+            return m_UniqueExpensesStorage.TotalUniqueAmountSinceFixedDate;
+        }
+
+
+
+
+        private RegularStorage m_RegularStorage;
+        private ExpensesStorage m_ExpensesStorage;
+        private UniqueExpensesStorage m_UniqueExpensesStorage;
 
     }
 }

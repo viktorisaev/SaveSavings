@@ -8,7 +8,7 @@
     xmlns:conv="using:SaveSavings.Converters"
     mc:Ignorable="d"
     xmlns:vm="using:SaveSavings.ViewModel"
-    NavigationCacheMode="Enabled"
+    NavigationCacheMode="Enabled" d:DataContext="{d:DesignData /SampleData/AllExpensesVMSampleData.xaml}"
     >
 
     <Page.Resources>
@@ -19,18 +19,6 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
         <Pivot>
-            <PivotItem Header="Overall">
-                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">
-                        <Run>Overall information</Run><LineBreak/>
-                        <Run>on savings</Run><LineBreak/>
-                </TextBlock>
-            </PivotItem>
-        
-            
-            
-            
-            
-            
             <PivotItem Header="Everyday">
                 <!--everyday expenses-->
                 <Grid>
@@ -70,16 +58,9 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <!--top button(s)-->
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Content="Add Expense" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Margin="5" Click="OnAddExpense_Clicked"/>
-                            <Button Grid.Column="1" Content="See Regulars" HorizontalAlignment="Stretch" Margin="5" Click="OnSeeRegulars_Clicked"/>
-                        </Grid>
+                        <!--top button(s)-->
+                        <Button Grid.Row="0" Content="Add Expense" Background="DarkRed" Foreground="White" HorizontalAlignment="Stretch" Margin="5" Click="OnAddExpense_Clicked"/>
 
                         <ListView Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected" ItemsSource="{Binding Expenses.ExpensesList}">
                             <ListView.ItemTemplate>
@@ -104,12 +85,28 @@
                 </Grid>
             </PivotItem>
 
-            
-          
-            
-            
-            
-            <PivotItem Header="Unique">
+
+
+
+
+
+        <PivotItem Header="Overall">
+            <StackPanel>
+                <TextBlock Margin="0,20,0,0" Text="If the salary happens today, then you saved:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Overall.SavedToday, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
+                <TextBlock Margin="0,20,0,0" Text="On the following date" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                <Button Content="{Binding Overall.DateSaved}" HorizontalAlignment="Stretch" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" Margin="5"/>
+                <TextBlock Text="you saved:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Overall.TotalSaved, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
+                <Button Content="See Regulars" HorizontalAlignment="Stretch" Margin="5,150,5,0" Click="OnSeeRegulars_Clicked"/>
+            </StackPanel>
+        </PivotItem>
+
+
+
+
+
+        <PivotItem Header="Unique">
                 
                 <!--unique expenses-->
                 <Grid>

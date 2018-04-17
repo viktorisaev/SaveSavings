@@ -1,0 +1,46 @@
+﻿<ViewModel:AllExpensesVM xmlns:ViewModel="using:SaveSavings.ViewModel" xmlns:System="using:System">
+	<ViewModel:AllExpensesVM.Expenses>
+		<ViewModel:ExpensesVM>
+			<ViewModel:ExpensesVM.AverageDailyIncome>
+				<System:Single/>
+			</ViewModel:ExpensesVM.AverageDailyIncome>
+			<ViewModel:ExpensesVM.AverageDailyExpense>
+				<System:Single/>
+			</ViewModel:ExpensesVM.AverageDailyExpense>
+			<ViewModel:ExpensesVM.AverageDailySave>
+				<System:Single/>
+			</ViewModel:ExpensesVM.AverageDailySave>
+		</ViewModel:ExpensesVM>
+	</ViewModel:AllExpensesVM.Expenses>
+	<ViewModel:AllExpensesVM.Overall>
+		<ViewModel:OverallVM>
+
+            <ViewModel:OverallVM.TotalSaved>
+                <System:Single>
+                    12.45
+                </System:Single>
+            </ViewModel:OverallVM.TotalSaved>
+
+            <ViewModel:OverallVM.SavedToday>
+                <System:Single>
+                    12.45
+                </System:Single>
+            </ViewModel:OverallVM.SavedToday>
+
+            <ViewModel:OverallVM.DateSaved>
+                <System:String>
+                    Dienstag, 13. April 2018
+                </System:String>
+            </ViewModel:OverallVM.DateSaved>
+            
+            
+		</ViewModel:OverallVM>
+	</ViewModel:AllExpensesVM.Overall>
+	<ViewModel:AllExpensesVM.UniqueExpenses>
+		<ViewModel:UniqueExpensesVM TotalAmountColor="#FFD4EDD2">
+			<ViewModel:UniqueExpensesVM.TotalAmount>
+				<System:Single/>
+			</ViewModel:UniqueExpensesVM.TotalAmount>
+		</ViewModel:UniqueExpensesVM>
+	</ViewModel:AllExpensesVM.UniqueExpenses>
+</ViewModel:AllExpensesVM>

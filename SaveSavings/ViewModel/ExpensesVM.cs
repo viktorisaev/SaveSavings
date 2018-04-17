@@ -29,7 +29,6 @@ namespace SaveSavings.ViewModel
                 m_ExpensesList.Add(_Expense);
         }
 
-
         // shadow data fields
         private ObservableCollection<ExpenseVM> m_ExpensesList = new ObservableCollection<ExpenseVM>();
 

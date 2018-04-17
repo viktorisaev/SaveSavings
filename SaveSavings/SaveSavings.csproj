@@ -104,6 +104,7 @@
     <Compile Include="ViewModel\AllExpensesVM.cs" />
     <Compile Include="ViewModel\EditUniqueItemVM.cs" />
     <Compile Include="ViewModel\EditRegularItemVM.cs" />
+    <Compile Include="ViewModel\OverallVM.cs" />
     <Compile Include="ViewModel\UniqueExpensesVM.cs" />
     <Compile Include="ViewModel\ExpensesVM.cs" />
     <Compile Include="ViewModel\UniqueExpenseVM.cs" />
@@ -169,6 +170,10 @@
       <SubType>Designer</SubType>
     </DesignData>
     <DesignData Include="SampleData\EditUniqueItemVMSampleData1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <DesignData Include="SampleData\AllExpensesVMSampleData.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>

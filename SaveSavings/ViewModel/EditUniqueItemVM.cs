@@ -62,7 +62,7 @@ namespace SaveSavings.ViewModel
             {
                 UniqueExpenseItemId = _ItemId;
 
-                UniqueExpensesStorage db = new UniqueExpensesStorage();
+                UniqueExpensesStorage db = App.GlobalPersistanceService.GetUniqueExpensesStorage();
                 UniqueExpenseItem ri = db.GetUniqueExpense(_ItemId);
 
                 this.Date = ri.Date.ToLocalTime();
@@ -98,7 +98,7 @@ namespace SaveSavings.ViewModel
                     addCommand = new DelegateCommand( 
                         p => {
 
-                            UniqueExpensesStorage db = new UniqueExpensesStorage();
+                            UniqueExpensesStorage db = App.GlobalPersistanceService.GetUniqueExpensesStorage();
 
                             int amount = DataConversion.ConvertCurrencyStringToIntegerCents(Amount);   // positive
 
@@ -138,7 +138,7 @@ namespace SaveSavings.ViewModel
                 {
                     updateCommand = new DelegateCommand(
                         p => {
-                            UniqueExpensesStorage db = new UniqueExpensesStorage();
+                            UniqueExpensesStorage db = App.GlobalPersistanceService.GetUniqueExpensesStorage();
 
                             int amount = DataConversion.ConvertCurrencyStringToIntegerCents(Amount);
                             if (m_IsIncome == false)
@@ -171,8 +171,7 @@ namespace SaveSavings.ViewModel
                 {
                     deleteCommand = new DelegateCommand(
                         p => {
-
-                            UniqueExpensesStorage db = new UniqueExpensesStorage();
+                            UniqueExpensesStorage db = App.GlobalPersistanceService.GetUniqueExpensesStorage();
 
                             if (UniqueExpenseItemId != NEW_REGULAR_ITEM_ID)
                             {

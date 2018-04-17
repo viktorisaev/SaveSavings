@@ -5,52 +5,28 @@ using System.Linq;
 
 namespace SaveSavings.Persistance
 {
-    class UniqueExpensesStorage
+    public class UniqueExpensesStorage
     {
 //        public int RegularIncomePerDay { get; set; }
 
+        public int TotalUniqueAmountSinceFixedDate { get; internal set; }
 
 
-        public UniqueExpensesStorage()
+        public UniqueExpensesStorage(DateTimeOffset _DateFixedAmount)
         {
 
-            //// calculate income per day
-            //using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
-            //{
-            //    // 1) request SQL table data
-            //    // RegularItem = model
-            //    var regulars = conn.Table<RegularItem>().OrderBy(o => o.Amount);   // of type TableQuery<T>, BaseTableQuery, IEnumerable<T>, IEnumerable
+            // calculate total unique
+            using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
+            {
+                var regulars = conn.Table<UniqueExpenseItem>();   // of type TableQuery<T>, BaseTableQuery, IEnumerable<T>, IEnumerable
 
-            //    // 2) process each record
+                int totalAmount = (from r in regulars
+                                   where r.Date >= _DateFixedAmount
+                                   select r.Amount).Sum();
 
-            //    float totalIncome = 0;
-            //    float totalExpense = 0;
-
-            //    RegularsVM regularsVM = new RegularsVM();
-            //    foreach (RegularItem r in regulars)
-            //    {
-            //        int amount = r.Amount;
-            //        if (amount > 0)
-            //        {
-            //            // positive = income
-            //            RegularItemVM regularItemVM = new RegularItemVM(r.Id, r.Name, amount, r.Period);
-            //            totalIncome += regularItemVM.GetDaily();
-
-            //        }
-            //        else
-            //        {
-            //            // negative = expense
-            //            amount = -amount;   // use absolute value
-            //            RegularItemVM regularItemVM = new RegularItemVM(r.Id, r.Name, amount, r.Period);
-            //            totalExpense += regularItemVM.GetDaily();
-            //        }
-            //    }
-
-            //    RegularIncomePerDay = (int)Math.Truncate(totalIncome * 100.0f) - (int)Math.Truncate(totalExpense * 100.0f);
-
-            //}
+                TotalUniqueAmountSinceFixedDate = -totalAmount;
+            }
         }
-
 
 
         // TODO: use stored cached data to create VM (possibly ?)
