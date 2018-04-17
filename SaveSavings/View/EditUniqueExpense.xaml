@@ -41,22 +41,22 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,0,12,0">
             <StackPanel>
-                <DatePicker Date="{Binding Date}"  Header="Date" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Name" InputScope="Text" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" PlaceholderText="Please put name here" />
+                <DatePicker Date="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Header="Date" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
+                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Name" InputScope="Text" Margin="10" FontSize="{ThemeResource TextStyleLargeFontSize}" PlaceholderText="Please put title here" />
                 <TextBox Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" PlaceholderText="Please put amount here"/>
 
-                <Grid Grid.Row="0" Visibility="{Binding ShowAddButton}" Margin="0,40,0,0">
+                <Grid Grid.Row="0" Visibility="{Binding ShowAddButton}" Margin="0,20,0,0">
                     <!--top button(s)-->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Content="Add Income" Background="ForestGreen" Margin="20" Padding="20" Foreground="White" HorizontalAlignment="Stretch" Command="{Binding EditCommand}" CommandParameter="i"/>
-                    <Button Grid.Column="1" Content="Add Expense" Background="DarkRed" Margin="20" Padding="20" Foreground="White" HorizontalAlignment="Stretch" Command="{Binding EditCommand}" CommandParameter="e" />
+                    <Button Grid.Column="0" Content="Add Income" Background="ForestGreen" Margin="20" Padding="20" Foreground="White" HorizontalAlignment="Stretch" Command="{Binding AddCommand}" CommandParameter="i"/>
+                    <Button Grid.Column="1" Content="Add Expense" Background="DarkRed" Margin="20" Padding="20" Foreground="White" HorizontalAlignment="Stretch" Command="{Binding AddCommand}" CommandParameter="e" />
                 </Grid>
 
-                <Button Visibility="{Binding ShowUpdateButton}" Content="{Binding UpdateButtonText}" Background="{Binding UpdateButtonColor}" Margin="20" Padding="20" Foreground="White" HorizontalAlignment="Stretch" Command="{Binding EditCommand}" CommandParameter="i"/>
+                <Button Visibility="{Binding ShowUpdateButton}" Command="{Binding UpdateCommand}" Content="{Binding UpdateButtonText}" Background="{Binding UpdateButtonColor}" Margin="20" Padding="20" Foreground="White" HorizontalAlignment="Stretch" />
 
                 <StackPanel Orientation="Horizontal">
                 </StackPanel>

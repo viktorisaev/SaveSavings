@@ -100,6 +100,7 @@
     <Compile Include="Model\UniqueExpense.cs" />
     <Compile Include="Persistance\GlobalPersistenceService.cs" />
     <Compile Include="Persistance\RegularStorage.cs" />
+    <Compile Include="Persistance\UniqueExpensesStorage.cs" />
     <Compile Include="ViewModel\AllExpensesVM.cs" />
     <Compile Include="ViewModel\EditUniqueItemVM.cs" />
     <Compile Include="ViewModel\EditRegularItemVM.cs" />

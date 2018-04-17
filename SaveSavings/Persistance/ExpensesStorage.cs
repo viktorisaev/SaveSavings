@@ -85,55 +85,6 @@ namespace SaveSavings.Persistance
 
 
 
-        // TODO: use stored cached data to create VM
-        internal UniqueExpensesVM GetAllUniqueExpenses()
-        {
-            UniqueExpensesVM outputUniqueExpenses = new UniqueExpensesVM();
-
-            // TODO: call DB
-            //var listOfExpenses = Db_Helper.GetAllExpenses();    // refactor: do not use temp List<>
-
-            //ObservableCollection<ExpenseVM> expenses = new ObservableCollection<ExpenseVM>();
-
-            //// 1) list
-
-            //DateTime dateOnlyFrom = DateTime.Now.ToLocalTime().Date;    // latch first date. Local time?
-
-            //int averageIncomePerDay = App.GlobalPersistanceService.GetAverageIncomePerDay();    // should be alread there
-
-            //foreach (ExpenseItem expenseItem in listOfExpenses)
-            //{
-            //    // skip to next day in DB
-            //    while (dateOnlyFrom > expenseItem.Date)
-            //    {
-            //        outputExpenses.AddExpense(new ExpenseVM(0, dateOnlyFrom, averageIncomePerDay));
-            //        dateOnlyFrom = dateOnlyFrom.AddDays(-1);
-            //    }
-            //    // eventually, store the current DB value
-            //    outputExpenses.AddExpense(new ExpenseVM(expenseItem.Id, expenseItem.Date, averageIncomePerDay - expenseItem.Amount));
-            //    dateOnlyFrom = dateOnlyFrom.AddDays(-1);
-            //}
-
-            //// 2) average
-            //outputExpenses.SetAverages(AverageExpense, averageIncomePerDay, averageIncomePerDay - AverageExpense);   // use stored value
-
-
-            // MOCK data
-            for (int i = 0, ei = 10; i < ei; ++i)
-            {
-                outputUniqueExpenses.AddExpense(new UniqueExpenseVM(i+1, DateTime.Now, 123 + i * 100, "Data " + i.ToString()));
-            }
-
-
-            outputUniqueExpenses.SetTotal(12300);
-
-
-            // return built result
-            return outputUniqueExpenses;
-        }
-
-
-
 
 
         // TODO: optimize out by storing all session data and update it when something changed only

@@ -37,7 +37,8 @@ namespace SaveSavings.View
             allExpenses.Expenses = expenses;
 
             // unique expenses
-            UniqueExpensesVM uniqueExpenses = dbcontacts.GetAllUniqueExpenses();
+            UniqueExpensesStorage db = new UniqueExpensesStorage();
+            UniqueExpensesVM uniqueExpenses = db.GetAllUniqueExpenses();
             allExpenses.UniqueExpenses = uniqueExpenses;
 
             this.DataContext = allExpenses;

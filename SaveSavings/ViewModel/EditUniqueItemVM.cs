@@ -54,21 +54,20 @@ namespace SaveSavings.ViewModel
 
 
         // TODO: use database ID for edit
-        public EditUniqueItemVM(bool _IsAdd, int _UniqueItemId)   // _RegularItemId could be NEW_REGULAR_ITEM_ID
+        public EditUniqueItemVM(bool _IsAdd, int _ItemId)   // _RegularItemId could be NEW_REGULAR_ITEM_ID
         {
             m_ShowAddButton = _IsAdd;
 
-            if (_UniqueItemId != RegularItemVM.NEW_REGULAR_ITEM_ID)
+            if (_ItemId != NEW_REGULAR_ITEM_ID)
             {
-                UniqueExpenseItemId = _UniqueItemId;
+                UniqueExpenseItemId = _ItemId;
 
-                //RegularStorage db = new RegularStorage();
-                //RegularItem ri = db.GetRegular(_UniqueItemId);
+                UniqueExpensesStorage db = new UniqueExpensesStorage();
+                UniqueExpenseItem ri = db.GetUniqueExpense(_ItemId);
 
-                // TODO: use DB here
-                this.Date = DateTimeOffset.Now.Date;
-                this.Name = "fhdsjk fds";//ri.Name;
-                int am = -486;
+                this.Date = ri.Date.ToLocalTime();
+                this.Name = ri.Name;
+                int am = ri.Amount;
                 m_IsIncome = am > 0; // save "income" or "expense"
                 this.Amount = DataConversion.ConvertCentsToCurrency(Math.Abs(am)).ToString();    // display abs amount
             }
@@ -94,43 +93,37 @@ namespace SaveSavings.ViewModel
         {
             get
             {
-                if (editCommand == null)
+                if (addCommand == null)
                 {
-                    editCommand = new DelegateCommand( 
+                    addCommand = new DelegateCommand( 
                         p => {
 
+                            UniqueExpensesStorage db = new UniqueExpensesStorage();
+
+                            int amount = DataConversion.ConvertCurrencyStringToIntegerCents(Amount);   // positive
+
                             // p='i' or 'e'
+                            if ((string)p == "i")
+                            {
+                                // income
+                                // positive
+                            }
+                            else
+                            {
+                                // expense
+                                amount = -amount;   // negative
+                            }
 
-                            //RegularStorage db = new RegularStorage();
+                            UniqueExpenseItem uei = new UniqueExpenseItem(NEW_REGULAR_ITEM_ID, Date.DateTime, amount, Name);
+                            db.InsertUniqueExpense(uei);
 
-                            //int amount = DataConversion.ConvertCurrencyStringToIntegerCents(Amount);
-                            //if (m_IsIncome == false)
-                            //{
-                            //    amount = -amount;   // expense is negative
-                            //}
+                            BackSpaceInvoked();
 
-                            //REGULARS_PERIOD period = GetPeriod();
-
-                            //RegularItem ri = new RegularItem(RegularItemId, Name, period, amount);
-
-                            //if (RegularItemId != RegularItemVM.NEW_REGULAR_ITEM_ID)
-                            //{
-                            //    // update
-                            //    db.UpdateRegular(ri);
-                            //}
-                            //else
-                            //{
-                            //    // add
-                            //    db.InsertRegular(ri);
-                            //}
-
-                            //BackSpaceInvoked();
-
-                        } , 
+                        }, 
                         p => ((Name.Length > 0) && ( (Amount.Length > 0) && DataConversion.CanConvertCurrencyStringToIntegerCents(Amount) ))
                     );
                 }
-                return editCommand;
+                return addCommand;
             }
         }
 
@@ -141,43 +134,29 @@ namespace SaveSavings.ViewModel
         {
             get
             {
-                if (editCommand == null)
+                if (updateCommand == null)
                 {
-                    editCommand = new DelegateCommand(
+                    updateCommand = new DelegateCommand(
                         p => {
+                            UniqueExpensesStorage db = new UniqueExpensesStorage();
 
-                            // m_IsIncome is the value
+                            int amount = DataConversion.ConvertCurrencyStringToIntegerCents(Amount);
+                            if (m_IsIncome == false)
+                            {
+                                amount = -amount;   // expense is negative
+                            }
 
-                            //RegularStorage db = new RegularStorage();
+                            UniqueExpenseItem ri = new UniqueExpenseItem(UniqueExpenseItemId, Date.DateTime, amount, Name);
 
-                            //int amount = DataConversion.ConvertCurrencyStringToIntegerCents(Amount);
-                            //if (m_IsIncome == false)
-                            //{
-                            //    amount = -amount;   // expense is negative
-                            //}
+                            // update
+                            db.UpdateUniqueExpense(ri);
 
-                            //REGULARS_PERIOD period = GetPeriod();
-
-                            //RegularItem ri = new RegularItem(RegularItemId, Name, period, amount);
-
-                            //if (RegularItemId != RegularItemVM.NEW_REGULAR_ITEM_ID)
-                            //{
-                            //    // update
-                            //    db.UpdateRegular(ri);
-                            //}
-                            //else
-                            //{
-                            //    // add
-                            //    db.InsertRegular(ri);
-                            //}
-
-                            //BackSpaceInvoked();
-
+                            BackSpaceInvoked();
                         },
                         p => ((Name.Length > 0) && ((Amount.Length > 0) && DataConversion.CanConvertCurrencyStringToIntegerCents(Amount)))
                     );
                 }
-                return editCommand;
+                return updateCommand;
             }
         }
 
@@ -193,15 +172,15 @@ namespace SaveSavings.ViewModel
                     deleteCommand = new DelegateCommand(
                         p => {
 
-                            //RegularStorage db = new RegularStorage();
+                            UniqueExpensesStorage db = new UniqueExpensesStorage();
 
-                            //if (RegularItemId != RegularItemVM.NEW_REGULAR_ITEM_ID)
-                            //{
-                            //    // update
-                            //    db.DeleteRegular(RegularItemId);
-                            //}
+                            if (UniqueExpenseItemId != NEW_REGULAR_ITEM_ID)
+                            {
+                                // update
+                                db.DeleteUniqueExpense(UniqueExpenseItemId);
+                            }
 
-                            //BackSpaceInvoked();
+                            BackSpaceInvoked();
 
                         },
                         p => (UniqueExpenseItemId != NEW_REGULAR_ITEM_ID)
@@ -222,7 +201,8 @@ namespace SaveSavings.ViewModel
 
 
 
-        private DelegateCommand editCommand;
+        private DelegateCommand addCommand;
+        private DelegateCommand updateCommand;
         private DelegateCommand deleteCommand;
 
 

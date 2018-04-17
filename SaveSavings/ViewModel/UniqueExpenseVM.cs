@@ -1,4 +1,5 @@
 ﻿using SaveSavings.Converters;
+using SaveSavings.Helpers;
 using SaveSavings.Model;
 using System;
 using Windows.UI;
@@ -25,16 +26,9 @@ namespace SaveSavings.ViewModel
         {
             this.Id = _Id;
             this.Date = _Date;
-            this.Amount = DataConversion.ConvertCentsToCurrency( _Amount );
-            this.AmountColor = GetColorByAmount( _Amount );
+            this.Amount = DataConversion.ConvertCentsToCurrency( Math.Abs(_Amount) );
+            this.AmountColor = ViewHelpers.GetColorByAmount( _Amount );
             this.Name = _Name;
-        }
-
-
-        private Brush GetColorByAmount(int amount)
-        {
-            // TODO: create and reference single 
-            return amount < 0 ? m_NegativeAmountBrush : m_PositiveAmountBrush;
         }
 
 
@@ -43,9 +37,6 @@ namespace SaveSavings.ViewModel
             return this.Date.Date;
         }
 
-
-        private static Brush m_PositiveAmountBrush = new SolidColorBrush(Colors.Green);
-        private static Brush m_NegativeAmountBrush = new SolidColorBrush(Colors.Red);
 
     }   // class ExpenseVM
 

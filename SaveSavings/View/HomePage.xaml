@@ -8,6 +8,7 @@
     xmlns:conv="using:SaveSavings.Converters"
     mc:Ignorable="d"
     xmlns:vm="using:SaveSavings.ViewModel"
+    NavigationCacheMode="Enabled"
     >
 
     <Page.Resources>
@@ -53,12 +54,12 @@
 
                             <StackPanel Grid.Column="0" Orientation="Horizontal">
                                 <TextBlock Text="Avg. income:" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,0,5,0"/>
-                                <TextBlock Foreground="Green" Text="{Binding Expenses.AverageDailyIncome,  Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
+                                <TextBlock Foreground="Green" Text="{Binding Expenses.AverageDailyIncome,  Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" />
                             </StackPanel>
                             
                             <StackPanel Grid.Column="1" Orientation="Horizontal">
                                 <TextBlock Text="Avg. expense:" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,0,5,0"/>
-                                <TextBlock Foreground="Red" Text="{Binding Expenses.AverageDailyExpense, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0"/>
+                                <TextBlock Foreground="Red" Text="{Binding Expenses.AverageDailyExpense, Converter={StaticResource CurrencyAmountConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" />
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -85,11 +86,11 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="4*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="8*"/>
+                                            <ColumnDefinition Width="2*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" TextWrapping="Wrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
-                                        <TextBlock Grid.Column="1" TextWrapping="Wrap" Foreground="{Binding AmountColor}" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
+                                        <TextBlock Grid.Column="0" TextWrapping="NoWrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
+                                        <TextBlock Grid.Column="1" TextWrapping="NoWrap" Foreground="{Binding AmountColor}" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -109,6 +110,7 @@
             
             
             <PivotItem Header="Unique">
+                
                 <!--unique expenses-->
                 <Grid>
                     <Grid.RowDefinitions>
@@ -118,9 +120,9 @@
 
                     <!--TitlePanel contains the name of the application and page title-->
                     <StackPanel Grid.Row="0">
-                        <StackPanel Orientation="Vertical" Margin="12,0">
+                        <StackPanel Orientation="Vertical">
                             <TextBlock Text="Total spent:" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding UniqueExpenses.TotalAmount, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding UniqueExpenses.TotalAmount, Converter={StaticResource CurrencyAmountConverter}}" Foreground="{Binding UniqueExpenses.TotalAmountColor}" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -137,23 +139,23 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Grid.ColumnSpan="2" Content="Add Unique" HorizontalAlignment="Stretch" Margin="5" Click="OnAddUniqueExpense_Clicked"/>
+                            <Button Grid.Column="0" Grid.ColumnSpan="2" Content="Add Unique" HorizontalAlignment="Stretch" Click="OnAddUniqueExpense_Clicked"/>
                         </Grid>
 
                         <ListView Grid.Row="1" x:Name="w_UniqueExpensesList" SelectionChanged="OnUniqueExpense_Selected" ItemsSource="{Binding UniqueExpenses.ExpensesList}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid Margin="0,5">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="4*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="8*"/>
+                                            <ColumnDefinition Width="2*"/>
                                         </Grid.ColumnDefinitions>
 
                                         <StackPanel Grid.Column="0" >
-                                            <TextBlock Text="{Binding Date, Converter={StaticResource DateConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Stretch"/>
-                                            <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Stretch"/>
+                                            <TextBlock TextWrapping="NoWrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Stretch"/>
+                                            <TextBlock TextWrapping="NoWrap" Text="{Binding Name}" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Stretch"/>
                                         </StackPanel>
-                                        <TextBlock Grid.Column="1" TextWrapping="Wrap" Foreground="{Binding AmountColor}" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
+                                        <TextBlock Grid.Column="1" TextWrapping="NoWrap" Foreground="{Binding AmountColor}" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -164,7 +166,9 @@
                             </ListView.ItemContainerStyle>
                         </ListView>
                     </Grid>
+                    
                 </Grid>
+                
             </PivotItem>
         </Pivot>
 
