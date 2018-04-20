@@ -41,8 +41,8 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="0" Margin="12,0,12,0">
             <StackPanel>
-                <DatePicker Date="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Header="Date" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
                 <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Name" InputScope="Text" Margin="10" FontSize="{ThemeResource TextStyleLargeFontSize}" PlaceholderText="Please put title here" />
+                <DatePicker Date="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Header="Date" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}"/>
                 <TextBox Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Amount" InputScope="CurrencyAmount" Margin="10" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" PlaceholderText="Please put amount here"/>
 
                 <Grid Grid.Row="0" Visibility="{Binding ShowAddButton}" Margin="0,20,0,0">

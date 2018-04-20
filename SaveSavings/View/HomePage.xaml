@@ -144,13 +144,13 @@
                                 <DataTemplate>
                                     <Grid Margin="0,5">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="8*"/>
+                                            <ColumnDefinition Width="7*"/>
                                             <ColumnDefinition Width="2*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <StackPanel Grid.Column="0" >
-                                            <TextBlock TextWrapping="NoWrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Stretch"/>
-                                            <TextBlock TextWrapping="NoWrap" Text="{Binding Name}" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Stretch"/>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock TextWrapping="WrapWholeWords" Text="{Binding Name}" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Left"/>
+                                            <TextBlock TextWrapping="NoWrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Stretch"/>
                                         </StackPanel>
                                         <TextBlock Grid.Column="1" TextWrapping="NoWrap" Foreground="{Binding AmountColor}" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
                                     </Grid>
