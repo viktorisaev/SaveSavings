@@ -11,21 +11,29 @@ namespace SaveSavings.Persistance
 
         public int TotalUniqueAmountSinceFixedDate { get; internal set; }
 
+        private DateTimeOffset m_DateFixedAmount;
+
 
         public UniqueExpensesStorage(DateTimeOffset _DateFixedAmount)
         {
+            m_DateFixedAmount = _DateFixedAmount;
 
             // calculate total unique
             using (SQLite.Net.SQLiteConnection conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), App.DB_PATH))
             {
-                var regulars = conn.Table<UniqueExpenseItem>();   // of type TableQuery<T>, BaseTableQuery, IEnumerable<T>, IEnumerable
-
-                int totalAmount = (from r in regulars
-                                   where r.Date >= _DateFixedAmount
-                                   select r.Amount).Sum();
-
-                TotalUniqueAmountSinceFixedDate = -totalAmount;
+                UpdateTotal(conn);
             }
+        }
+
+        private void UpdateTotal(SQLite.Net.SQLiteConnection conn)
+        {
+            var regulars = conn.Table<UniqueExpenseItem>();   // of type TableQuery<T>, BaseTableQuery, IEnumerable<T>, IEnumerable
+
+            int totalAmount = (from r in regulars
+                               where r.Date >= m_DateFixedAmount
+                               select r.Amount).Sum();
+
+            TotalUniqueAmountSinceFixedDate = -totalAmount;
         }
 
 
@@ -82,6 +90,9 @@ namespace SaveSavings.Persistance
                 {
                     conn.Insert(_Item);
                 });
+
+                // after insert - update total
+                UpdateTotal(conn);
             }
         }
 
@@ -110,6 +121,9 @@ namespace SaveSavings.Persistance
                 {
                     conn.Update(_Item);
                 });
+
+                // after insert - update total
+                UpdateTotal(conn);
             }
         }
 
@@ -126,6 +140,9 @@ namespace SaveSavings.Persistance
 
                     conn.Delete(ri);
                 });
+
+                // after insert - update total
+                UpdateTotal(conn);
             }
         }
 

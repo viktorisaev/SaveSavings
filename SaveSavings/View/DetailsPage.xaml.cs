@@ -16,8 +16,6 @@ namespace SaveSavings.View
     /// </summary>
     public sealed partial class DetailsPage : Page
     {
-        DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
-
         ExpenseVM m_CurrentExpense = null;
 
 
@@ -54,7 +52,7 @@ namespace SaveSavings.View
 
             // store data
             ExpenseItem spend = new ExpenseItem(m_CurrentExpense.Id, m_CurrentExpense.Date, valCents);
-            Db_Helper.UpdateDetails(spend);//Update selected DB contact Id
+            App.GlobalPersistanceService.GetExpensesStorage().UpdateDetails(spend);//Update selected DB contact Id
 
             // interface transition
             Frame.Navigate(typeof(HomePage));
@@ -64,7 +62,7 @@ namespace SaveSavings.View
 
         private void DeleteContact_Click(object sender, RoutedEventArgs e)
         {
-            Db_Helper.DeleteContact(m_CurrentExpense.Id);//Delete selected DB contact Id.
+            App.GlobalPersistanceService.GetExpensesStorage().DeleteContact(m_CurrentExpense.Id);//Delete selected DB contact Id.
             Frame.Navigate(typeof(HomePage));
         }
 

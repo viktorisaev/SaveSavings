@@ -83,17 +83,6 @@ namespace SaveSavings.View
 
 
 
-        private void DeleteAll_Click(object sender, RoutedEventArgs e)
-        {
-            DatabaseHelperClass delete = new DatabaseHelperClass();
-            delete.DeleteAllContact();//delete all DB contacts
-            DB_ContactList.Clear();//Clear collections
-//            btnDelete.IsEnabled = false;
-            listBoxobj.ItemsSource = DB_ContactList;
-        }
-
-
-
         private void AddContact_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(AddContact), m_CurrentDate);

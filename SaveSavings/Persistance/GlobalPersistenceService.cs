@@ -26,6 +26,11 @@ namespace SaveSavings.Persistance
             return m_UniqueExpensesStorage;
         }
 
+        public ExpensesStorage GetExpensesStorage()
+        {
+            return m_ExpensesStorage;
+        }
+
 
         public int GetAverageIncomePerDay()
         {

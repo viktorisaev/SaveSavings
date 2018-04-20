@@ -51,14 +51,13 @@ namespace SaveSavings.View
 
         private async void AddExpense_Click(object sender, RoutedEventArgs e)
         {
-            DatabaseHelperClass Db_Helper = new DatabaseHelperClass();
             if (w_AmountOfExpense.Text != "")
             {
                 try
                 {
                     int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
 
-                    Db_Helper.Insert(new ExpenseItem(0, w_DateOfExpense.Date.DateTime, valCents));
+                    App.GlobalPersistanceService.GetExpensesStorage().Insert(new ExpenseItem(0, w_DateOfExpense.Date.DateTime, valCents));
                     Frame.Navigate(typeof(DailyPage), w_DateOfExpense.Date.DateTime);
                 }
                 catch
