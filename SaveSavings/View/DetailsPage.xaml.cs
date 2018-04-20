@@ -36,7 +36,7 @@ namespace SaveSavings.View
             m_CurrentExpense = e.Parameter as ExpenseVM;
 
             // fill data into widgets
-            w_DateOfExpense.Date = new DateTimeOffset(m_CurrentExpense.Date);
+            w_DateOfExpense.Date = new DateTimeOffset(m_CurrentExpense.GetDateOnly());
             w_AmountOfExpense.Text = m_CurrentExpense.Amount.ToString();
 
             w_AmountOfExpense.Focus(FocusState.Keyboard);
@@ -47,11 +47,11 @@ namespace SaveSavings.View
         private void UpdateContact_Click(object sender, RoutedEventArgs e)
         {
             // parse widgets values to data
-            m_CurrentExpense.Date = w_DateOfExpense.Date.DateTime;
+            m_CurrentExpense.SetDate(w_DateOfExpense.Date.DateTime);
             int valCents = DataConversion.ConvertCurrencyStringToIntegerCents(w_AmountOfExpense.Text);
 
             // store data
-            ExpenseItem spend = new ExpenseItem(m_CurrentExpense.Id, m_CurrentExpense.Date, valCents);
+            ExpenseItem spend = new ExpenseItem(m_CurrentExpense.Id, m_CurrentExpense.GetDateOnly(), valCents);
             App.GlobalPersistanceService.GetExpensesStorage().UpdateDetails(spend);//Update selected DB contact Id
 
             // interface transition

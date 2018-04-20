@@ -70,7 +70,7 @@
                                             <ColumnDefinition Width="8*"/>
                                             <ColumnDefinition Width="2*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" TextWrapping="NoWrap" Text="{Binding Date, Converter={StaticResource DateConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
+                                        <TextBlock Grid.Column="0" TextWrapping="NoWrap" Text="{Binding Date}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
                                         <TextBlock Grid.Column="1" TextWrapping="NoWrap" Foreground="{Binding AmountColor}" Text="{Binding Amount, Converter={StaticResource CurrencyAmountConverter}}" FontSize="{ThemeResource TextStyleLargeFontSize}" HorizontalAlignment="Stretch"/>
                                     </Grid>
                                 </DataTemplate>

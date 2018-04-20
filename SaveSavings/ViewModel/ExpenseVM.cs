@@ -9,10 +9,11 @@ namespace SaveSavings.ViewModel
     public class ExpenseVM
     {
         public int Id { get; set; }     //The Id property is marked as the Primary Key  
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public float Amount { get; set; }
         public Brush AmountColor { get; set; }
 
+        private DateTime m_Date;
 
         public ExpenseVM()
         {
@@ -22,8 +23,10 @@ namespace SaveSavings.ViewModel
 
         public ExpenseVM(int _Id, DateTime _Date, int _Amount)
         {
+            m_Date = _Date;
+
             this.Id = _Id;
-            this.Date = _Date;
+            SetDate(_Date);
             this.Amount = DataConversion.ConvertCentsToCurrency( _Amount );
             this.AmountColor = GetColorByAmount( _Amount );
         }
@@ -36,9 +39,15 @@ namespace SaveSavings.ViewModel
         }
 
 
+        public void SetDate(DateTime _Date)
+        {
+            m_Date = _Date;
+            this.Date = _Date == DateTime.Now.Date ? "< Today >" : _Date.ToString("D");
+        }
+
         public DateTime GetDateOnly()
         {
-            return this.Date.Date;
+            return this.m_Date;
         }
 
 

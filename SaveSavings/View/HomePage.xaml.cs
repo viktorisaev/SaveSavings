@@ -72,7 +72,7 @@ namespace SaveSavings.View
             if (listBoxobj.SelectedIndex != -1)
             {
                 ExpenseVM listitem = listBoxobj.SelectedItem as ExpenseVM;//Get slected listbox item contact ID
-                Frame.Navigate(typeof(DailyPage), listitem.Date);
+                Frame.Navigate(typeof(DailyPage), listitem.GetDateOnly());
             }
         }
 
