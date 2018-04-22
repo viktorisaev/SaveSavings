@@ -77,7 +77,7 @@ namespace SaveSavings.View
             foreach( var r in expenses.ExpensesList )
             {
                 financialStuffList.Add(new FinancialStuff() { IdX = i, Amount = r.Amount });
-                i += 1;
+                i -= 1;
             }
 
             (LineChart.Series[0] as LineSeries).ItemsSource = financialStuffList;
