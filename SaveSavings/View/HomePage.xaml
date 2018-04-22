@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:conv="using:SaveSavings.Converters"
+    xmlns:Charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     mc:Ignorable="d"
     xmlns:vm="using:SaveSavings.ViewModel"
     NavigationCacheMode="Enabled" d:DataContext="{d:DesignData /SampleData/AllExpensesVMSampleData.xaml}"
@@ -18,7 +19,7 @@
     </Page.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-        <Pivot>
+        <Pivot SelectionChanged="Pivot_SelectionChanged">
             <PivotItem Header="Everyday">
                 <!--everyday expenses-->
                 <Grid>
@@ -90,23 +91,45 @@
 
 
 
-        <PivotItem Header="Overall">
-            <StackPanel>
-                <TextBlock Margin="0,20,0,0" Text="If the salary happens today, then you saved:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding Overall.SavedToday, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
-                <TextBlock Margin="0,20,0,0" Text="On the following date" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
-                <Button Content="{Binding Overall.DateSaved}" HorizontalAlignment="Stretch" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" Margin="5"/>
-                <TextBlock Text="you saved:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding Overall.TotalSaved, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
-                <Button Content="See Regulars" HorizontalAlignment="Stretch" Margin="5,150,5,0" Click="OnSeeRegulars_Clicked"/>
-            </StackPanel>
-        </PivotItem>
+            <PivotItem Header="Overall">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Margin="0,20,0,0" Text="If the salary happens today, then you saved:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Overall.SavedToday, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
+                        <TextBlock Margin="0,20,0,0" Text="On the following date" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                        <Button Content="{Binding Overall.DateSaved}" HorizontalAlignment="Stretch" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" Margin="5"/>
+                        <TextBlock Text="you saved:" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Overall.TotalSaved, Converter={StaticResource CurrencyAmountConverter}}" Foreground="Green" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <Charting:Chart Grid.Row="1" x:Name="LineChart" VerticalAlignment="Stretch">
+
+                        <Charting:LineSeries IndependentValuePath="IdX" DependentValuePath="Amount">
+                            <Charting:LineSeries.LegendItemStyle >
+                                <Style TargetType="Charting:LegendItem">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </Style>
+                            </Charting:LineSeries.LegendItemStyle>
+
+                        </Charting:LineSeries>
+                    </Charting:Chart>
+
+
+                    <Button Grid.Row="2" Content="See Regulars" HorizontalAlignment="Stretch" Margin="5" Click="OnSeeRegulars_Clicked"/>
+                </Grid>
+            </PivotItem>
 
 
 
 
 
-        <PivotItem Header="Unique">
+            <PivotItem Header="Unique">
                 
                 <!--unique expenses-->
                 <Grid>

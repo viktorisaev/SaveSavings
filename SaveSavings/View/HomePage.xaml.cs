@@ -1,11 +1,11 @@
 ﻿using SaveSavings.Persistance;
 using SaveSavings.ViewModel;
 using System;
+using System.Collections.Generic;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-
+using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
 namespace SaveSavings.View
 {
@@ -26,15 +26,20 @@ namespace SaveSavings.View
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
+        public class FinancialStuff
+        {
+            public int IdX { get; set; }
+            public float Amount { get; set; }
+        }
 
 
         private void ReadContactList_Loaded(object sender, RoutedEventArgs e)
         {
             ExpensesStorage dbcontacts = new ExpensesStorage();
-            ExpensesVM expenses = dbcontacts.GetAllExpenses();//Get all DB expenses
+            AllExpensesVM allExpenses = new AllExpensesVM();
 
             // everyday expenses
-            AllExpensesVM allExpenses = new AllExpensesVM();
+            ExpensesVM expenses = dbcontacts.GetAllExpenses();//Get all DB expenses
             allExpenses.Expenses = expenses;
 
             // unique expenses
@@ -57,12 +62,27 @@ namespace SaveSavings.View
 
             // use Binding, not setters!!
 
-//            TotalStatistics stats = new DatabaseHelperClass().GetTotalStatistics();
+            //            TotalStatistics stats = new DatabaseHelperClass().GetTotalStatistics();
 
-//            w_TotalExpenses.Text = string.Format("{0:C}", DataConversion.ConvertCentsToCurrency(stats.m_TotalExpenses));
+            //            w_TotalExpenses.Text = string.Format("{0:C}", DataConversion.ConvertCentsToCurrency(stats.m_TotalExpenses));
 
             // set list data - recent dates first
-//            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
+            //            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
+
+
+            Random rand = new Random();
+            List<FinancialStuff> financialStuffList = new List<FinancialStuff>();
+
+            int i = 0;
+            foreach( var r in expenses.ExpensesList )
+            {
+                financialStuffList.Add(new FinancialStuff() { IdX = i, Amount = r.Amount });
+                i += 1;
+            }
+
+            (LineChart.Series[0] as LineSeries).ItemsSource = financialStuffList;
+
+
         }
 
 
@@ -120,5 +140,9 @@ namespace SaveSavings.View
             this.Frame.Navigate(typeof(EditUniqueExpense), uniqueExpenseItem);
         }
 
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int i = 1;
+        }
     }   // class HomePage
 }
