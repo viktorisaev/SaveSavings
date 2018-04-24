@@ -73,11 +73,14 @@ namespace SaveSavings.View
             Random rand = new Random();
             List<FinancialStuff> financialStuffList = new List<FinancialStuff>();
 
-            int i = 0;
-            foreach( var r in expenses.ExpensesList )
+            int idx = 0; ;
+            float sum = 78.55f; 
+            for( int i = expenses.ExpensesList.Count - 1, ei = 0 ; i >= ei ; --i )
             {
-                financialStuffList.Add(new FinancialStuff() { IdX = i, Amount = r.Amount });
-                i -= 1;
+                var r = expenses.ExpensesList[i];
+                sum += r.Amount;
+                financialStuffList.Add(new FinancialStuff() { IdX = idx, Amount = sum });
+                idx += 1;
             }
 
             (LineChart.Series[0] as LineSeries).ItemsSource = financialStuffList;
