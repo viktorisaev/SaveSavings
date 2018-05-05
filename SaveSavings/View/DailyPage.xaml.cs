@@ -47,13 +47,22 @@ namespace SaveSavings.View
             //}
 
             // set list data - recent dates first
-            listBoxobj.ItemsSource = DB_ContactList.OrderByDescending(i => i.Date).ToList();
+            var dailySet = DB_ContactList.OrderByDescending(i => i.Date).ToList();
+            listBoxobj.ItemsSource = dailySet;
 
 //            CultureInfo myCI = CultureInfo.CurrentCulture;
 //            w_DailyCurrentDate.Text = myCI.NumberFormat.CurrencyDecimalSeparator + myCI.NumberFormat.NumberDecimalSeparator + myCI.NumberFormat.CurrencySymbol;
 
             // THIS IS PROPER CODE!!!
+            // TODO: use VM, not direct setter
             w_DailyCurrentDate.Text = string.Format("{0:D}", m_CurrentDate);
+
+            float dailySum = 0;
+            foreach(var r in dailySet)
+            {
+                dailySum += r.Amount;
+            }
+            w_DailySumAmount.Text = string.Format("{0:C}", dailySum);
         }
 
 

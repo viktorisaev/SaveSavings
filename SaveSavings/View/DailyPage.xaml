@@ -26,12 +26,20 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
+            <!--total day-->
+            <StackPanel Grid.Row="0" Orientation="Vertical" Margin="12,0">
+                <TextBlock Text="Save every day:" Style="{ThemeResource CaptionTextBlockStyle}" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="w_DailySumAmount" Style="{ThemeResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
+            </StackPanel>
+
+
             <!--list-->
-            <ListView Grid.Row="0" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">
+            <ListView Grid.Row="1" x:Name="listBoxobj" SelectionChanged="DateListItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -53,12 +61,12 @@
             </ListView>
 
             <!--buttons bottom-->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Grid.ColumnSpan="2" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="10" Padding="20" Click="AddContact_Click"/>
+                <Button Grid.Column="0" Grid.ColumnSpan="2" Name="btnAdd" Content="Add Expense" HorizontalAlignment="Stretch" Margin="10" Padding="20" Foreground="White" Background="DarkRed" Click="AddContact_Click"/>
             </Grid>
 
 
