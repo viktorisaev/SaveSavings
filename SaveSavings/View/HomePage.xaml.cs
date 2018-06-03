@@ -1,6 +1,7 @@
 ﻿using SaveSavings.Persistance;
 using SaveSavings.ViewModel;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -74,13 +75,37 @@ namespace SaveSavings.View
             List<FinancialStuff> financialStuffList = new List<FinancialStuff>();
 
             int idx = 0; ;
-            float sum = 78.55f; 
-            for( int i = expenses.ExpensesList.Count - 1, ei = 0 ; i >= ei ; --i )
+            float sum = 78.55f;
+
+            // sum up unique expenses before first regular date
+            if (allExpenses.Expenses.ExpensesList.Count > 0)
             {
-                var r = expenses.ExpensesList[i];
+                DateTime dateOnlyFrom = allExpenses.Expenses.ExpensesList[allExpenses.Expenses.ExpensesList.Count - 1].GetDateOnly().Date;
+                var uniqueExpensesBeforeTheDate = allExpenses.UniqueExpenses.ExpensesList.Where((v) => ((v.Date < dateOnlyFrom))).Sum((v) => v.SignedAmount);
+                sum += uniqueExpensesBeforeTheDate;
+            }
+
+            DateTime now = DateTime.Now;
+
+            for ( int i = allExpenses.Expenses.ExpensesList.Count - 1, ei = 0 ; i >= ei ; --i )
+            {
+                var r = allExpenses.Expenses.ExpensesList[i];
                 sum += r.Amount;
-                financialStuffList.Add(new FinancialStuff() { IdX = idx, Amount = sum });
-                idx += 1;
+
+                // get unique expenses for the date
+                DateTime dateOnlyFrom = r.GetDateOnly().Date;
+                DateTime dateOnlyTo = dateOnlyFrom.AddDays(1).Date;
+                var uniqueExpensesForTheDate = allExpenses.UniqueExpenses.ExpensesList.Where((v) => ((v.Date >= dateOnlyFrom) && (v.Date < dateOnlyTo))).Sum((v)=>v.SignedAmount);
+
+                sum += uniqueExpensesForTheDate;
+
+                // display 30 last days (to limit amount of chart data)
+                if ((DateTime.Now - r.GetDateOnly()).Days < 30)
+                {
+                    // add point to the chart
+                    financialStuffList.Add(new FinancialStuff() { IdX = idx, Amount = sum });
+                    idx += 1;
+                }
             }
 
             (LineChart.Series[0] as LineSeries).ItemsSource = financialStuffList;

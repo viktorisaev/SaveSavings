@@ -12,6 +12,7 @@ namespace SaveSavings.ViewModel
         public int Id { get; set; }     //The Id property is marked as the Primary Key  
         public DateTime Date { get; set; }
         public float Amount { get; set; }
+        public float SignedAmount { get; set; }
         public Brush AmountColor { get; set; }
         public string Name { get; set; }
 
@@ -27,6 +28,7 @@ namespace SaveSavings.ViewModel
             this.Id = _Id;
             this.Date = _Date;
             this.Amount = DataConversion.ConvertCentsToCurrency( Math.Abs(_Amount) );
+            this.SignedAmount = DataConversion.ConvertCentsToCurrency( _Amount );
             this.AmountColor = ViewHelpers.GetColorByAmount( _Amount );
             this.Name = _Name;
         }
